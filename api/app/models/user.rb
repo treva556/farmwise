@@ -8,5 +8,8 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
 
+  # Define a has_many association for products
+  has_many :products
+
   # ... Other user-related associations and methods
 end

@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+
+    respond_to do |format|
+        format.json { render json: @products } # Render JSON
+      end
   end
 
   def show

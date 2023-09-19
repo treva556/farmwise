@@ -6,8 +6,8 @@ default: &default
 development:
   <<: *default
   database: api_development
-  username: api
-  password: 'farmer' # Replace with the actual password you set for the api user
+  username: newapi
+  password: 'newpassword' # Replace with the actual password you set for the api user
   host: localhost
   port: 5432
   sslmode: prefer
@@ -15,8 +15,8 @@ development:
 test:
   <<: *default
   database: api_test
-  username: api
-  password: 'farmer' # Replace with the actual password you set for the api user
+  username: newapi
+  password: 'newpassword' # Replace with the actual password you set for the api user
   host: localhost
   port: 5432
   sslmode: prefer
@@ -24,8 +24,10 @@ test:
 production:
   <<: *default
   database: api_production
-  username: api
-  password: 'farmer' # Replace with the actual password you set for the api user
+  username: newapi
+  password: 'newpassword' # Replace with the actual password you set for the api user
   host: localhost
   port: 5432
   sslmode: prefer
+
+
