@@ -1,16 +1,11 @@
 import React from 'react';
 import './App.css';
-import Home from './pages/Homepage';
-import LoginPage from './pages/Loginpage';
-import Searchpage from './pages/Searchpage.js';
-import Sellerform from './pages/Sellerform';
+import AppRouter from './Router/AppRouter';
 
 function App() {
   return (
     <div className="App">
-      <Home/>
-      <Searchpage/>
-      <Sellerform/>
+      <AppRouter/>
     </div>
   );
 }
