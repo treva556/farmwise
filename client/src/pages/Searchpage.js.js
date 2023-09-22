@@ -1,6 +1,6 @@
 import React from "react";
 
-function App() {
+function Searchpage() {
     return (
       <div>
         
@@ -8,5 +8,5 @@ function App() {
     );
   }
   //
-  export default App;
+  export default Searchpage;
   
