@@ -1,6 +1,6 @@
 import React from "react";
 
-function Add() {
+function Ad (){
     return (
       <div>
         
@@ -8,5 +8,5 @@ function Add() {
     );
   }
   //
-  export default Add;
+  export default Ad;
   
