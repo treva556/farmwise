@@ -3,9 +3,9 @@ import React from "react";
 function Ad (){
     return (
       
-        <div>
-           <div class="container mx-auto bg-teal-400 h-16">
-
+         <div>
+           <div class="container mx-auto bg-grey-400 h-44">
+    lll
            </div>
 
       </div>
