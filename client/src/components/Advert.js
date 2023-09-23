@@ -4,10 +4,8 @@ function Ad (){
     return (
       
          <div>
-           <div class="container mx-auto bg-grey-400 h-44">
-    lll
-           </div>
-
+         
+         
       </div>
     );
   }
