@@ -9,6 +9,8 @@ function Home() {
       <div>
         <header>
          <Ad/>
+
+         <p className=" bg-yellow-400 mb-4"> Welcome to Farmwise</p>
          <Searchbar/>
         </header>
         <body>

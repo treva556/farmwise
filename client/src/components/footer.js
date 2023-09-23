@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
     return (
       <div>
-           <footer className='w-4/5 m-auto p-10'>
+           <footer className='w-4/5 m-auto p-10 mt-6'>
       <div className='md:flex grid grid-cols-2 gap justify-between items-start my-10'>
         <div className='space-y-5 py-5 border-b'>
           <h1 className='text-3xl font-bold'>Farm Wise</h1>
