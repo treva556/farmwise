@@ -1,87 +1,37 @@
 import React from "react";
 import Itemcard from "./Itemcard";
+import { Link } from 'react-router-dom';
+import pic1 from "../images/pic1.png"; // Import the image
 
-// Define a custom style for smaller item cards
-const smallerItemCardStyle = {
-  width: "200px", // Adjust the width as needed
-  height: "300px", // Adjust the height as needed
+
+const catNav = [
+    {
+        name: "Mobiles",
+        icon: pic1, // Make  you import and declare your icons
+    },
+    {
+        name: "Fashion",
+        icon: pic1,
+    },
+    // ... (other categories)
+]
+
+const ItemShowcase = () => {
+    return (
+        <section className="hidden sm:block bg-white mt-10 mb-4 min-w-full px-12 py-1 shadow overflow-hidden">
+            <div className="flex items-center justify-between mt-4">
+                {catNav.map((item, i) => (
+                    <Link to={`/products?category=${item.name}`} className="flex flex-col gap-1 items-center p-2 group" key={i}>
+                        <div className="h-16 w-16">
+                            <img draggable="false" className="h-full w-full object-contain" src={item.icon} alt={item.name} />
+                        </div>
+                        <span className="text-sm text-gray-800 font-medium group-hover:text-primary-blue">{item.name}</span>
+                    </Link>
+                ))}
+            </div>
+        </section>
+    );
 };
 
-function ItemShowcase() {
-  return (
-    <div className="min-h-screen bg-yellow-300">
-      <div className=" justify-center">
-      <h1 className="text-3xl font-bold ">Item Showcase</h1>
-      <h2 className="text-xl mb-5">Explore our products</h2>
-    </div>
-      {/* Render your Itemcard components with smallerItemCardStyle */}
-      <div className="">
-        equipments and services
-      <div className="container mx-auto py-8 flex flex-wrap space-x-4 space-y-6">
-        <div style={smallerItemCardStyle} className="mr-4 mb-2">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-      </div>
-      </div>
-      {/* Render your Itemcard components with smallerItemCardStyle */}
-      <div className="bg-white mb-7 items-start">
-        Farm Produce
-      <div className="container mx-auto py-8 flex flex-wrap space-x-4 space-y-6 ">
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-      </div>
-      </div>
-      {/* Render your Itemcard components with smallerItemCardStyle */}
-      <div className=" bg-white mb-7">
-        animal products
-      <div
-       style={{ marginBottom: "20px" }} // Adjust the margin-bottom as needed
-       className="container mx-auto py-8 flex flex-wrap space-x-4 space-y-6">
-        <div style={smallerItemCardStyle} className="mr-4 mb-2">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-        <div style={smallerItemCardStyle} className="mr-4">
-          <Itemcard />
-        </div>
-
-      </div>
-      </div>
-      <div className=" bg-yellow-300 text-yellow-300">
-          kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-      </div>
-    </div>
-  );
-}
 
 export default ItemShowcase;
