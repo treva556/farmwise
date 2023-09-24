@@ -11,9 +11,9 @@ function Home() {
          <Ad/>
 
          <p className=" bg-yellow-400 text-xl"> Welcome to Farmwise</p>
-         {/* <Searchbar/> */}
+         <Searchbar/>
         </header>
-        <body>
+        <body className=" bg-yellow-400">
           <ItemShowcase/>
         </body>
         <Footer/>
