@@ -10,8 +10,8 @@ function Home() {
         <header>
          <Ad/>
 
-         <p className=" bg-yellow-400 mb-4"> Welcome to Farmwise</p>
-         <Searchbar/>
+         <p className=" bg-yellow-400 text-xl"> Welcome to Farmwise</p>
+         {/* <Searchbar/> */}
         </header>
         <body>
           <ItemShowcase/>

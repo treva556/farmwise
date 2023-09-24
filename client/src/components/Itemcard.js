@@ -3,7 +3,7 @@ import pic1 from "../images/pic1.png"; // Import the image
 
 function Itemcard() {
   return (
-    <div>
+    <div className=" mb-2 mt-2 mr-2 ml-2  border-solid border-2 border-green-600">
       <div className="block rounded-sm bg-white dark:bg-neutral-700">
         <a href="#!">
           <img

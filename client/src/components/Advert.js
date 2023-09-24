@@ -3,11 +3,10 @@ import React from "react";
 function Ad (){
     return (
       
-      <div className="h-9 flex bg-green-950 font-bold col-span-2">
-         Advert
-         
-         
-      </div>
+      <div className="w-[60cm] h-[3cm] bg-green-700 text bg-center">
+      {/* Your content here */}
+      <p className=""> Advert</p>
+    </div>
     );
   }
   
