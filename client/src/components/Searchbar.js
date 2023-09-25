@@ -72,7 +72,7 @@ import React, { useState } from "react";
         >
           Search
         </button>
-  
+     <button className=" ml-8 justify-end items-end">BE a SELLER</button> 
     </div>
   );
 }

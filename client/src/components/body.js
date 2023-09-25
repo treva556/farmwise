@@ -7,7 +7,7 @@ function Bodyy() {
   return (
     <>
       <div className="mt-8 bg-yellow-200">
-        <h1>Farm Produce</h1>
+        <h1 className=" text-xl">Farm Produce</h1>
         <div className="flex">
           <Link to="/farmproduce/cereals">
             <div className="w-full shadow-sm p-5 rounded-md cursor-pointer hover:border-green-500">
@@ -36,7 +36,7 @@ function Bodyy() {
 
 
       <div className="mt-8 bg-yellow-200">
-        <h1>Animal Produce</h1>
+        <h1 className=" text-xl underline">Animal Produce</h1>
         <div className="flex">
           <Link to="/farmproduce/cereals">
             <div className="w-full shadow-sm p-5 rounded-md cursor-pointer hover:border-green-500">
