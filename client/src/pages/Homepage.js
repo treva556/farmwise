@@ -7,10 +7,10 @@ import ItemShowcase from "../components/ItemShowcase";
 function Home() {
     return (
       <div>
-        <header>
+        <header className=" bg-yellow-400">
          <Ad/>
 
-         <p className=" bg-yellow-400 text-xl"> Welcome to Farmwise</p>
+         <p className=" bg-yellow-400 text-xl "> Welcome to Farmwise</p>
          <Searchbar/>
         </header>
         <body className=" bg-yellow-400">
