@@ -7,14 +7,14 @@ import Bodyy from "../components/body";
 
 function Home() {
     return (
-      <div>
-        <header className=" bg-yellow-400">
+      <div className=" bg-green-600">
+        <header className="">
          <Ad/>
 
-         <p className=" bg-yellow-400 text-xl "> Welcome to Farmwise</p>
+         <p className=" text-xl "> Welcome to Farmwise</p>
          <Searchbar/>
         </header>
-        <body className=" bg-yellow-400">
+        <body className="">
           {/* <ItemShowcase/> */}
         <Bodyy/>
         </body>

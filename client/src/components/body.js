@@ -6,7 +6,7 @@ import pic1 from "../images/pic1.png";
 function Bodyy() {
   return (
     <>
-      <div className="mt-8">
+      <div className="mt-8 bg-yellow-200">
         <h1>Farm Produce</h1>
         <div className="flex">
           <Link to="/farmproduce/cereals">
@@ -31,8 +31,12 @@ function Bodyy() {
           </Link>
         </div>
       </div>
-      <div className="mt-8">
-        <h1>Farm Produce</h1>
+
+
+
+
+      <div className="mt-8 bg-yellow-200">
+        <h1>Animal Produce</h1>
         <div className="flex">
           <Link to="/farmproduce/cereals">
             <div className="w-full shadow-sm p-5 rounded-md cursor-pointer hover:border-green-500">
@@ -56,8 +60,11 @@ function Bodyy() {
           </Link>
         </div>
       </div>
-      <div className="mt-8">
-        <h1>Farm Produce</h1>
+
+
+
+      <div className="mt-8 bg-yellow-200">
+        <h1>Farm Equipments And Services</h1>
         <div className="flex">
           <Link to="/farmproduce/cereals">
             <div className="w-full shadow-sm p-5 rounded-md cursor-pointer hover:border-green-500">
