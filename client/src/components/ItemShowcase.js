@@ -58,8 +58,7 @@ const ItemShowcase = () => {
             {selectedCategory === i && (
               <div className="flex justify-center space-x-4 mt-4">
                 {category.subcategories.map((subcategory, subcategoryIndex) => (
-                  <Link
-                    to={`/products?subcategory=${subcategory}`}
+                  <div
                     key={subcategoryIndex}
                     className="flex flex-col items-center"
                   >
@@ -72,7 +71,7 @@ const ItemShowcase = () => {
                     <div className="text-sm text-gray-800 mt-2">
                       {subcategory}
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             )}
@@ -84,6 +83,17 @@ const ItemShowcase = () => {
 };
 
 export default ItemShowcase;
+
+
+
+
+
+
+
+
+
+
+
 
 
 //carosssel lib
