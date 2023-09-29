@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :users, only: [:new, :create, :edit, :update, :show]
-
-
+  
   resources :categories do
     resources :subcategories do
-      resources :products
+      resources :products, only: [:index, :create, :new, :edit, :show, :update, :destroy]
     end
   end
-  # Defines the root path route ("/")
 
-  # root "articles#index"
+  # Add non-nested routes for products if necessary
+  resources :products, only: [:index, :show, :create, :update, :destroy]
+
+  # Define the root path route ("/")
+  # root "controller_name#action_name"
 end
