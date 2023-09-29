@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     def update?
       user.admin? || user == record
     end
+
+    def user_params
+        params.require(:user).permit(:location, :email, :phone_number, :name, :image, :password, :password_confirmation)
+      end
   
     # Define other authorization rules based on your application's needs
 end
