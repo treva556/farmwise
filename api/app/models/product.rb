@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   validates :description, presence: true
   validates :image, presence: true
   validates :location, presence: true
+  validates_presence_of :user_id, :category, :subcategory
+
 
   belongs_to :user
 
