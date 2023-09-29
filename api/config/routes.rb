@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show]
 
 
-  resources :products
-
+  resources :categories do
+    resources :subcategories do
+      resources :products
+    end
+  end
   # Defines the root path route ("/")
 
   # root "articles#index"

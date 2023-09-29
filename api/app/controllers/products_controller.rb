@@ -1,44 +1,58 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:index]
+  before_action :set_subcategory, only: [:index]
 
   def index
-    @products = Product.all
+    if @subcategory
+      @products = Product.where(subcategory: @subcategory)
+    elsif @category
+      @products = Product.where(category: @category)
+    else
+      @products = Product.all
+    end
 
     respond_to do |format|
-        format.json { render json: @products } # Render JSON
-      end
+      format.json { render json: @products }
+    end
   end
 
   def show
-  end
-
-  def new
-    @product = Product.new
+    respond_to do |format|
+      format.json { render json: @product }
+    end
   end
 
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to @product, notice: 'Product was successfully created.'
+      respond_to do |format|
+        format.json { render json: @product, status: :created }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
-  end
-
-  def edit
   end
 
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      respond_to do |format|
+        format.json { render json: @product, status: :ok }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @product.destroy
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    respond_to do |format|
+      format.json { head :no_content, status: :ok }
+    end
   end
 
   private
@@ -47,7 +61,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_category
+    @category = Category.find_by(id: params[:category_id])
+  end
+
+  def set_subcategory
+    @subcategory = Subcategory.find_by(id: params[:subcategory_id])
+  end
+
   def product_params
-    params.require(:product).permit(:name, :price, :description, :image, :location)
+    params.require(:product).permit(:name, :price, :description, :image, :location, :category_id, :subcategory_id)
   end
 end
