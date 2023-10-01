@@ -23,6 +23,7 @@ class CategoriesController < ApplicationController
     private
   
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.find_by(name: params[:id])
+      render json: { error: 'Category not found' }, status: :not_found unless @category
     end
 end
