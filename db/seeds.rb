@@ -1,19 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-# Create sellers
-User.create(name: 'Seller 1', email: 'seller1@example.com', location: 'County 1', phone_number: '123456789', password: 'password123')
-User.create(name: 'Seller 2', email: 'seller2@example.com', location: 'County 2', phone_number: '987654321', password: 'password456')
 
-# Create products associated with sellers
-seller1 = User.find_by(name: 'Seller 1')
-seller1.products.create(name: 'Product 1', price: 10, description: 'Description 1', image: 'image1.jpg', location: 'County 1')
-seller1.products.create(name: 'Product 2', price: 20, description: 'Description 2', image: 'image2.jpg', location: 'County 1')
 
-seller2 = User.find_by(name: 'Seller 2')
-seller2.products.create(name: 'Product 3', price: 15, description: 'Description 3', image: 'image3.jpg', location: 'County 2')
-seller2.products.create(name: 'Product 4', price: 25, description: 'Description 4', image: 'image4.jpg', location: 'County 2')
+users = User.create([
+  { username: 'user1', email: 'user1@example.com', password: 'password' },
+  { username: 'user2', email: 'user2@example.com', password: 'password' },
+  # Add more users as needed
+])
+
+# Create categories
+categories = Category.create([
+  { name: 'Category 1' },
+  { name: 'Category 2' },
+  # Add more categories as needed
+])
+
+# Create subcategories
+subcategories = Subcategory.create([
+  { name: 'Subcategory 1', category: categories.first },
+  { name: 'Subcategory 2', category: categories.second },
+  # Add more subcategories as needed
+])
+
+# Create products
+products = Product.create([
+  { name: 'Product 1', description: 'Description for Product 1', price: 10, image: 'product1.jpg', location: 'Location 1', user: User.first, subcategory: subcategories.first, category: categories.first },
+  { name: 'Product 2', description: 'Description for Product 2', price: 15, image: 'product2.jpg', location: 'Location 2', user: User.second, subcategory: subcategories.second, category: categories.second },
+  # Add more products as needed
+])
+
+puts 'Seed data created successfully!'

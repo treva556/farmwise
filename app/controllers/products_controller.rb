@@ -1,13 +1,14 @@
+
+
+# app/controllers/products_controller.rb
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :set_category, only: [:index]
-  before_action :set_subcategory, only: [:index]
 
   def index
-    if @subcategory
-      @products = Product.where(subcategory: @subcategory)
-    elsif @category
-      @products = Product.where(category: @category)
+    if params[:subcategory_id].present?
+      @products = Product.where(subcategory_id: params[:subcategory_id])
+    elsif params[:category_id].present?
+      @products = Product.joins(:subcategory).where(subcategories: { category_id: params[:category_id] })
     else
       @products = Product.all
     end
@@ -23,6 +24,7 @@ class ProductsController < ApplicationController
     end
   end
 
+  # Implement other controller actions as needed (create, update, destroy)
   def create
     @product = Product.new(product_params)
     if @product.save
@@ -61,15 +63,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def set_category
-    @category = Category.find_by(id: params[:category_id])
-  end
-
-  def set_subcategory
-    @subcategory = Subcategory.find_by(id: params[:subcategory_id])
-  end
-
   def product_params
-    params.require(:product).permit(:name, :price, :description, :image, :location, :category_id, :subcategory_id)
+    params.require(:product).permit(:name, :price, :description, :image, :location, :user_id, :subcategory_id)
   end
 end
