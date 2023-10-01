@@ -1,29 +1,26 @@
-
-
 class CategoriesController < ApplicationController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
-    def index
-      @categories = Category.all
-    
-      respond_to do |format|
-        format.html # Render HTML view if the request format is HTML
-        format.json { render json: @categories } # Render JSON for other formats like JSON
-      end
-    end
+  def index
+    @categories = Category.all
   
-    def show
-      respond_to do |format|
-        format.json { render json: @category }
-      end
+    respond_to do |format|
+      format.html # Render HTML view if the request format is HTML
+      format.json { render json: @categories } # Render JSON for other formats like JSON
     end
-  
-    # Implement other controller actions as needed (create, update, destroy)
-    
-    private
-  
-    def set_category
-      @category = Category.find_by(name: params[:id])
-      render json: { error: 'Category not found' }, status: :not_found unless @category
+  end
+
+  def show
+    respond_to do |format|
+      format.json { render json: @category }
     end
+  end
+
+  # Implement other controller actions as needed (create, update, destroy)
+  
+  private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
 end
