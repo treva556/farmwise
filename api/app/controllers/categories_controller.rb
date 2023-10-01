@@ -1,10 +1,14 @@
+
+
 class CategoriesController < ApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
 
     def index
       @categories = Category.all
+    
       respond_to do |format|
-        format.json { render json: @categories }
+        format.html # Render HTML view if the request format is HTML
+        format.json { render json: @categories } # Render JSON for other formats like JSON
       end
     end
   

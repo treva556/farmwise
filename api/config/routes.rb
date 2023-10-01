@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # Add non-nested routes for products if necessary
   resources :products, only: [:index, :show, :create, :update, :destroy]
 
+  get '/category', to: 'categories#index'
+
+
   # Define the root path route ("/")
   # root "controller_name#action_name"
 end
