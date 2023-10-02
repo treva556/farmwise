@@ -1,14 +1,16 @@
+
 # config/routes.rb
 Rails.application.routes.draw do
-  resources :categories, param: :slug, only: [] do
-    resources :subcategories, param: :slug, only: [] do
+  resources :categories, param: :slug, only: [:index, :show] do
+    resources :subcategories, param: :slug, only: [:index, :show, :create, :update, :destroy]
+
       resources :products, param: :slug, only: [:show, :update, :destroy]
     end
-  end
+  
 
   resources :products, only: [:index, :show, :create, :update, :destroy]
 
-  get '/category', to: 'categories#index'
+  get '/category', to: 'categories#index', format: 'json'
 
-  root 'controller_name#action_name' # Define your root path route
+  root 'categories#index' # Set the root path to the categories#index action
 end
