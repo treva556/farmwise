@@ -19,6 +19,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @category = Category.find_by(slug: params[:slug])
+
     respond_to do |format|
       format.json { render json: @product }
     end
