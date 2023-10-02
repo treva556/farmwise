@@ -30,6 +30,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+
+gem 'rack-cors', require: 'rack/cors'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 gem 'bcrypt', '~> 3.1.7' # You can specify a version or use a different one

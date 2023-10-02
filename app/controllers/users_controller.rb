@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
     attr_reader :user, :record
 

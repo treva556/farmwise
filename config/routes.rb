@@ -1,18 +1,16 @@
-Rails.application.routes.draw do
-  resources :users, only: [:new, :create, :edit, :update, :show]
-  
-  resources :categories do
-    resources :subcategories do
-      resources :products, only: [:index, :create, :new, :edit, :show, :update, :destroy]
-    end
-  end
 
-  # Add non-nested routes for products if necessary
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :categories, param: :slug, only: [:index, :show] do
+    resources :subcategories, param: :slug, only: [:index, :show, :create, :update, :destroy]
+
+      resources :products, param: :slug, only: [:show, :update, :destroy]
+    end
+  
+
   resources :products, only: [:index, :show, :create, :update, :destroy]
 
-  get '/category', to: 'categories#index'
+  get '/category', to: 'categories#index', format: 'json'
 
-
-  # Define the root path route ("/")
-  # root "controller_name#action_name"
+  root 'categories#index' # Set the root path to the categories#index action
 end
