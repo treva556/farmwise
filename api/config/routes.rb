@@ -1,13 +1,11 @@
 
 
-
 Rails.application.routes.draw do
+  resources :users, only: [:index, :show, :update, :destroy]
+
   resources :categories, param: :slug, only: [:index, :show] do
     resources :subcategories, param: :slug, only: [:index, :show] do
-      resources :products, param: :slug, only: [:show, :update, :destroy] 
-      resources :users, only: [:index, :show]
-
-        
+      resources :products, param: :slug, only: [:show, :update, :destroy]
     end
   end
 
