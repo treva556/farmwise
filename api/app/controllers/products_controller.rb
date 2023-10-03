@@ -62,7 +62,15 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    # Find product by slug instead of id
+    @product = Product.find_by(slug: params[:id])
+
+    # If the product is not found by slug, return a not found response
+    unless @product
+      respond_to do |format|
+        format.json { render json: { error: 'Product not found' }, status: :not_found }
+      end
+    end
   end
 
   def product_params
