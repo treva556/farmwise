@@ -33,3 +33,4 @@ products = Product.create([
 puts 'Seed data created successfully!'
 
 
+user = User.new(name: 'Mark Trevor',phone_number: '0795116244',location: 'Kiambu, Kiambu',email: 'marktreva99@gmail.com',password: 'your_password_here',)
