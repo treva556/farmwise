@@ -1,8 +1,29 @@
 
-
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   before_action :authorize_user, only: [:update, :destroy]
+
+
+
+  def register
+    user = User.create(user_params)
+    if user.valid?
+      token = user.generate_jwt
+      render json: { token: token }, status: :created
+    else
+      render json: { error: user.errors.full_messages.join(', ') }, status: :unprocessable_entity
+    end
+  end
+
+  def login
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      token = user.generate_jwt
+      render json: { token: token }
+    else
+      render json: { error: 'Invalid email or password' }, status: :unauthorized
+    end
+  end
 
   # GET /users
   def index
