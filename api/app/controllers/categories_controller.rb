@@ -30,3 +30,6 @@ class CategoriesController < ApplicationController
 
   end
 end
+
+
+#iii
