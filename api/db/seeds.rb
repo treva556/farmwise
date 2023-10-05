@@ -31,3 +31,5 @@ products = Product.create([
 ])
 
 puts 'Seed data created successfully!'
+
+
