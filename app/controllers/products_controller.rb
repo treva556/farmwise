@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
-
+  
     render json: @products
   end
 
@@ -31,16 +31,27 @@ class ProductsController < ApplicationController
   private
 
   def set_category
-    @category = Category.find_by(slug: params[:category_slug])
+    if params[:subcategory_slug].present?
+      @category = Category.find_by(slug: params[:category_slug])
+    else
+      @category = Category.find_by(slug: params[:category_slug])
+    end
+  
     render json: { error: 'Category not found' }, status: :not_found unless @category
   end
 
   def set_product
-    # Find product by slug within the category instead of globally
-    @product = @category.products.find_by(slug: params[:id])
 
+    Rails.logger.debug("Params: #{params.inspect}")
+
+    # Find product by slug within the category
+    @product = @category.products.find_by(slug: params[:slug])
+  
     # If the product is not found by slug, set it to nil
     @product = nil unless @product
+
+    Rails.logger.debug("Product: #{@product}")
+
   end
 
   def product_params
