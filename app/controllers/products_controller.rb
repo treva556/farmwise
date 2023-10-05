@@ -1,68 +1,46 @@
 
 
-# app/controllers/products_controller.rb
 class ProductsController < ApplicationController
+  before_action :set_category
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:subcategory_id].present?
-      @products = Product.where(subcategory_id: params[:subcategory_id])
-    elsif params[:category_id].present?
-      @products = Product.joins(:subcategory).where(subcategories: { category_id: params[:category_id] })
+    if params[:subcategory_slug].present?
+      subcategory = @category.subcategories.find_by(slug: params[:subcategory_slug])
+      @products = subcategory&.products || []
+    elsif params[:category_slug].present?
+      category = Category.find_by(slug: params[:category_slug])
+      @products = category&.products || []
     else
       @products = Product.all
     end
 
-    respond_to do |format|
-      format.json { render json: @products }
-    end
+    render json: @products
   end
 
   def show
-    @category = Category.find_by(slug: params[:slug])
-
-    respond_to do |format|
-      format.json { render json: @product }
+    unless @product
+      render json: { error: 'Product not found' }, status: :not_found
+    else
+      render json: @product
     end
   end
 
   # Implement other controller actions as needed (create, update, destroy)
-  def create
-    @product = Product.new(product_params)
-    if @product.save
-      respond_to do |format|
-        format.json { render json: @product, status: :created }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    if @product.update(product_params)
-      respond_to do |format|
-        format.json { render json: @product, status: :ok }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @product.destroy
-    respond_to do |format|
-      format.json { head :no_content, status: :ok }
-    end
-  end
 
   private
 
+  def set_category
+    @category = Category.find_by(slug: params[:category_slug])
+    render json: { error: 'Category not found' }, status: :not_found unless @category
+  end
+
   def set_product
-    @product = Product.find(params[:id])
+    # Find product by slug within the category instead of globally
+    @product = @category.products.find_by(slug: params[:id])
+
+    # If the product is not found by slug, set it to nil
+    @product = nil unless @product
   end
 
   def product_params

@@ -1,3 +1,5 @@
+
+
 # Create users
 users = User.create([
   { username: 'user1', email: 'user1@example.com', password: 'password' },

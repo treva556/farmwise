@@ -10,31 +10,45 @@ class SubcategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by(slug: params[:slug])
-
-    # Logic to fetch and render a specific subcategory
     render json: @subcategory
   end
 
   def create
-    # Logic to create a new subcategory
+    @subcategory = @category.subcategories.build(subcategory_params)
+
+    if @subcategory.save
+      render json: @subcategory, status: :created
+    else
+      render json: @subcategory.errors, status: :unprocessable_entity
+    end
   end
 
   def update
-    # Logic to update a subcategory
+    if @subcategory.update(subcategory_params)
+      render json: @subcategory
+    else
+      render json: @subcategory.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    # Logic to delete a subcategory
+    @subcategory.destroy
+    head :no_content
   end
 
   private
 
+  def subcategory_params
+    params.require(:subcategory).permit(:name) # Add other permitted parameters here
+  end
+
   def set_category
-    @category = Category.find(params[:category_id])
+    @category = Category.find_by(slug: params[:category_slug])
+    render json: { error: 'Category not found' }, status: :not_found unless @category
   end
 
   def set_subcategory
-    @subcategory = @category.subcategories.find(params[:id])
+    @subcategory = @category.subcategories.find_by(slug: params[:slug])
+    render json: { error: 'Subcategory not found' }, status: :not_found unless @subcategory
   end
 end

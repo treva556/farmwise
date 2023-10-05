@@ -1,6 +1,7 @@
 
 class Product < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :subcategory_id }
+
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :description, presence: true
   validates :image, presence: true
@@ -11,3 +12,4 @@ class Product < ApplicationRecord
 
   belongs_to :subcategory
 end
+
