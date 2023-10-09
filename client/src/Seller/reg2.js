@@ -28,7 +28,13 @@ function Form() {
       console.error('Error from server:', error);
       // Handle error, e.g., show an error message to the user
     }
+    if (error.response) {
+      console.log('Validation errors:', error.response.data.error);
+    }
   };
+
+  console.log(form_data);
+
 
   return (
     <div className="bg-yellow-400 flex justify-center items-center min-h-screen">
