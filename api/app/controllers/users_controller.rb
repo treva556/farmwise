@@ -1,17 +1,29 @@
 
+
+
+
 class UsersController < ApplicationController
+
+  skip_before_action :verify_authenticity_token, only: [:register]
+  before_action :parse_json, only: [:register] # Add this line
+
+
+
   before_action :set_user, only: [:show, :update, :destroy]
   before_action :authorize_user, only: [:update, :destroy]
 
 
-
   def register
+    Rails.logger.debug("Register action triggered")
+    Rails.logger.debug("Received parameters: #{params.inspect}")
+  
     user = User.create(user_params)
     if user.valid?
       token = user.generate_jwt
-      render json: { token: token }, status: :created
+      render json: { token: token, message: 'Registration successful' }, status: :created
     else
-      render json: { error: user.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      Rails.logger.debug("Validation errors: #{user.errors.full_messages.join(', ')}")
+      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -51,6 +63,10 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+  def parse_json
+    request.format = :json
+  end
+
   private
 
   def set_user
@@ -58,7 +74,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:location, :email, :phone_number, :name, :image, :password, :password_confirmation)
+    params.require(:user).permit(:location, :email, :phone, :name, :image, :password, :password_confirmation)
   end
 
   def authorize_user
@@ -67,3 +83,4 @@ class UsersController < ApplicationController
     end
   end
 end
+

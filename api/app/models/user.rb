@@ -1,3 +1,5 @@
+
+
 class User < ApplicationRecord
     enum role: [:user, :seller, :admin]
   
@@ -12,4 +14,10 @@ class User < ApplicationRecord
   has_many :products
 
   # ... Other user-related associations and methods
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 } # Add a minimum length requirement here
+
 end
+
