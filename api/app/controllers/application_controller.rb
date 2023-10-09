@@ -1,3 +1,6 @@
+
+
+
 class ApplicationController < ActionController::Base
     def authorize_admin
         unless current_user.admin?

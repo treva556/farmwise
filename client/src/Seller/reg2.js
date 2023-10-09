@@ -1,3 +1,6 @@
+
+
+
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
@@ -7,6 +10,8 @@ function Form() {
   const phone_numberRef = useRef();
   const locationRef = useRef();
   const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+
   const [error, setError] = useState(null); // State for handling errors
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +19,7 @@ function Form() {
     phone: '',
     location: '',
     password: ''
+   passwordConfirm: ''
   });
 
   const handleSubmit = async (e) => {
@@ -26,6 +32,7 @@ function Form() {
       phone: phone_numberRef.current.value,
       location: locationRef.current.value,
       password: passwordRef.current.value
+      passwordConfirmation: passwordConfirmationRef.current.value
     });
 
     try {
@@ -49,6 +56,7 @@ function Form() {
         <input type="text" ref={phone_numberRef} placeholder='Phone:'/>
         <input type="text" ref={locationRef} placeholder='Locat:'/>
         <input type="text" ref={passwordRef} placeholder='Password:'/>
+        <input type="text" ref={passwordConfirmRef} placeholder='Confirm Password:'/>
         <button type='submit'>Submit</button>
         {error && <div>{error}</div>} {/* Display error message */}
       </form>
@@ -56,4 +64,7 @@ function Form() {
   );
 }
 
-export default Form;
+export default Form;,
+
+
+

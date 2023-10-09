@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
 
-  def create
+  # def create
 
   def login
     user = User.find_by(email: params[:email])
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:location, :email, :phone, :name, :image, :password, :password_confirmation)
+    params.require(:user).permit(:location, :email, :phone_number, :name, :image, :password, :password_confirmation)
   end
 
   def authorize_user
@@ -92,23 +92,6 @@ class UsersController < ApplicationController
   end
 end
 
+end
 
 
-
-
-
-# class UsersController < ApplicationController
-#   skip_before_action :authorize, only: :create, :update
-
-
-#   def create
-#     user = User.create!(user_params)
-#     sessions[:user_id] = user.id
-#     render json:  user, status: :created
-#   emd
-
-# def show
-#   render json: @current_user
-# end
-
-# end
