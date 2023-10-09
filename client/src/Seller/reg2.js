@@ -1,5 +1,4 @@
-
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
 function Form() {
@@ -8,33 +7,39 @@ function Form() {
   const phone_numberRef = useRef();
   const locationRef = useRef();
   const passwordRef = useRef();
-    
+  const [error, setError] = useState(null); // State for handling errors
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    location: '',
+    password: ''
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-        
-    const form_data = {
+
+    // Update form_data state with the latest input values
+    setFormData({
       name: nameRef.current.value,
       email: emailRef.current.value,
       phone: phone_numberRef.current.value,
       location: locationRef.current.value,
       password: passwordRef.current.value
-    };
+    });
 
     try {
-      const res = await axios.post("http://localhost:3000/register", form_data);
+      const res = await axios.post("http://localhost:3000/register", formData);
       console.log('Response from server:', res.data);
       // Handle success, e.g., redirect or show a success message
     } catch (error) {
       console.error('Error from server:', error);
       // Handle error, e.g., show an error message to the user
-    }
-    if (error.response) {
-      console.log('Validation errors:', error.response.data.error);
+      if (error.response) {
+        setError(error.response.data.error);
+      }
     }
   };
-
-  console.log(form_data);
-
 
   return (
     <div className="bg-yellow-400 flex justify-center items-center min-h-screen">
@@ -45,6 +50,7 @@ function Form() {
         <input type="text" ref={locationRef} placeholder='Locat:'/>
         <input type="text" ref={passwordRef} placeholder='Password:'/>
         <button type='submit'>Submit</button>
+        {error && <div>{error}</div>} {/* Display error message */}
       </form>
     </div>
   );

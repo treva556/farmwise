@@ -5,7 +5,7 @@ class User < ApplicationRecord
   
   # ... Other user-related attributes and validations
 
-  has_secure_password
+  # has_secure_password
 
   mount_uploader :image, ImageUploader
 
@@ -21,8 +21,9 @@ class User < ApplicationRecord
   # ... Other user-related associations and methods
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 } # Add a minimum length requirement here
+  validates :email, presence: true
+  # uniqueness: true
+  # validates :password, presence: true # Add a minimum length requirement here
 
 end
 

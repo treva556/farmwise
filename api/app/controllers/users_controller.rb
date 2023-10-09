@@ -2,8 +2,8 @@
 
 class UsersController < ApplicationController
 
-  skip_before_action :verify_authenticity_token, only: [:register]
-  skip_before_action :verify_authenticity_token, only: [:login]
+  # skip_before_action :verify_authenticity_token, only: [:register]
+  # skip_before_action :verify_authenticity_token, only: [:login]
 
 
   before_action :set_user, only: [:show, :update, :destroy]
