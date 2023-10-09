@@ -1,12 +1,13 @@
 
+
+
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from '../pages/Homepage';
 import Searchpage from '../pages/Searchpage';
 // import LoginPage from '../pages/Loginpage';
-import Sellerform from '../Seller/Sellerform';
 import Adminprofile from '../Admin/Adminprofile';
-
+import Form from '../Seller/reg2';
 // import Layout from '../Admin/Layout';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
@@ -30,9 +31,10 @@ function AppRouter() {
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard/>} />
-        <Route path="/sellerform" element={<Sellerform/>} />
-        <Route path="/create" element={<createProduct/>} />
 
+        
+        <Route path="/form" element={<Form/>} />
+        <Route path="/create" element={<createProduct/>} />
 
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
