@@ -1,11 +1,13 @@
 
 
-import React, { useState } from "react";
+
+
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginShop = ({ setUser }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const history = useNavigate(); // Get the history object from React Router
 
   const handleSubmit = async (e) => {
@@ -16,7 +18,10 @@ const LoginShop = ({ setUser }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        }),
       });
 
       if (response.ok) {
@@ -34,8 +39,6 @@ const LoginShop = ({ setUser }) => {
     }
   };
 
-  console.log(LoginShop)
-
   return (
     <div className="login-form">
       <h2>Login</h2>
@@ -43,15 +46,13 @@ const LoginShop = ({ setUser }) => {
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={emailRef}
           required
         />
         <input
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          ref={passwordRef}
           required
         />
         <button type="submit">Login</button>
@@ -61,9 +62,3 @@ const LoginShop = ({ setUser }) => {
 };
 
 export default LoginShop;
-
-
-
-
-
-

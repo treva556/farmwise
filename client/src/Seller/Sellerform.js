@@ -1,12 +1,10 @@
 
 
-
-
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios';
 
 const Sellerform = () => {
-  const [formData, setFormData] = useState({
+  const formDataRef = useRef({
     name: '',
     email: '',
     phone: '',
@@ -15,17 +13,17 @@ const Sellerform = () => {
   });
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
+    formDataRef.current = {
+      ...formDataRef.current,
       [e.target.name]: e.target.value
-    });
+    };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('http://localhost:3000/register', formData, {
+      const response = await axios.post('http://localhost:3000/register', formDataRef.current, {
         headers: {
           'Content-Type': 'application/json',
         }
@@ -37,8 +35,6 @@ const Sellerform = () => {
       // Handle error, e.g., show an error message to the user
     }
   };
-
-  console.log(Sellerform)
 
   return (
     <div className="bg-yellow-400 flex justify-center items-center min-h-screen">
@@ -117,6 +113,3 @@ const Sellerform = () => {
 };
 
 export default Sellerform;
-
-
-

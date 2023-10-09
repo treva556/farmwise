@@ -1,3 +1,4 @@
+
 require_relative "boot"
 
 require "rails/all"
@@ -18,5 +19,14 @@ module Api
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://localhost:3001' # Replace with the actual domain of your React app
+        resource '/register', headers: :any, methods: [:post]
+        resource '/login', headers: :any, methods: [:post]
+
+        # Add other routes as needed
+      end
+      end
   end
 end

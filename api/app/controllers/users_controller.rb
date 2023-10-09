@@ -1,11 +1,9 @@
 
 
-
 class UsersController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: [:register]
-  before_action :parse_json, only: [:register] # Add this line
-
+  skip_before_action :verify_authenticity_token, only: [:login]
 
 
   before_action :set_user, only: [:show, :update, :destroy]
@@ -65,6 +63,7 @@ class UsersController < ApplicationController
   def parse_json
     request.format = :json
   end
+
 
   private
 
