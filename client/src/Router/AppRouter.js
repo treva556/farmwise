@@ -18,6 +18,7 @@ import Addcategory from '../Admin/addcategory';
 import Allusers from '../Admin/Userspage';
 import UserDashboard from '../Seller/Shop';
 import LoginShop from '../Seller/Login';
+import createProduct from '../Seller/Productform';
 
 
 function AppRouter() {
@@ -30,6 +31,8 @@ function AppRouter() {
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard/>} />
         <Route path="/sellerform" element={<Sellerform/>} />
+        <Route path="/create" element={<createProduct/>} />
+
 
 
         <Route path="/admin/pending" element={<Pendingshops/>} />

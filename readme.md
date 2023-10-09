@@ -8,6 +8,7 @@
 - Ruby on Rails 
 - React js
 - Postgress
+- Tailwind
 
 ## Author  & license
 - Mark Trevor
