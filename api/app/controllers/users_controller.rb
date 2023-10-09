@@ -1,5 +1,6 @@
 
 
+
 class UsersController < ApplicationController
 
   # skip_before_action :verify_authenticity_token, only: [:register]
@@ -11,6 +12,9 @@ class UsersController < ApplicationController
 
 
   def register
+
+    begin
+
     Rails.logger.debug("Register action triggered")
     Rails.logger.debug("Received parameters: #{params.inspect}")
   
@@ -22,7 +26,13 @@ class UsersController < ApplicationController
       Rails.logger.debug("Validation errors: #{user.errors.full_messages.join(', ')}")
       render json: { error: user.errors.full_messages }, status: :unprocessable_entity
     end
+  rescue StandardError => e
+    render json: { error: e.message }, status: :internal_server_error
   end
+  end
+
+
+  def create
 
   def login
     user = User.find_by(email: params[:email])
@@ -82,3 +92,23 @@ class UsersController < ApplicationController
   end
 end
 
+
+
+
+
+
+# class UsersController < ApplicationController
+#   skip_before_action :authorize, only: :create, :update
+
+
+#   def create
+#     user = User.create!(user_params)
+#     sessions[:user_id] = user.id
+#     render json:  user, status: :created
+#   emd
+
+# def show
+#   render json: @current_user
+# end
+
+# end
