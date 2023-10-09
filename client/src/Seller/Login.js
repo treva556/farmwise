@@ -34,6 +34,8 @@ const LoginShop = ({ setUser }) => {
     }
   };
 
+  console.log(LoginShop)
+
   return (
     <div className="login-form">
       <h2>Login</h2>

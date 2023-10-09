@@ -1,5 +1,8 @@
 
 
+
+
+
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :update, :destroy]
   post '/register', to: 'users#register'

@@ -38,6 +38,8 @@ const Sellerform = () => {
     }
   };
 
+  console.log(Sellerform)
+
   return (
     <div className="bg-yellow-400 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md p-8 bg-green-200 rounded-md shadow-xl">
