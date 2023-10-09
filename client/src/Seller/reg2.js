@@ -1,25 +1,22 @@
-
-
-
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
 function Form() {
   const nameRef = useRef();
   const emailRef = useRef();
-  const phone_numberRef = useRef();
+  const phoneRef = useRef();
   const locationRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const [error, setError] = useState(null); // State for handling errors
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phone_number: '',
     location: '',
-    password: ''
-   passwordConfirm: ''
+    password: '',
+    password_confirmation: '' // Changed to match Rails controller parameter
   });
 
   const handleSubmit = async (e) => {
@@ -29,10 +26,10 @@ function Form() {
     setFormData({
       name: nameRef.current.value,
       email: emailRef.current.value,
-      phone: phone_numberRef.current.value,
+      phone_number: phoneRef.current.value,
       location: locationRef.current.value,
-      password: passwordRef.current.value
-      passwordConfirmation: passwordConfirmationRef.current.value
+      password: passwordRef.current.value,
+      password_confirmation: passwordConfirmRef.current.value // Changed to match Rails controller parameter
     });
 
     try {
@@ -53,18 +50,15 @@ function Form() {
       <form onSubmit={(e) => handleSubmit(e)}>
         <input type="text" ref={nameRef} placeholder='Name:'/>
         <input type="text" ref={emailRef} placeholder='Email:'/>
-        <input type="text" ref={phone_numberRef} placeholder='Phone:'/>
-        <input type="text" ref={locationRef} placeholder='Locat:'/>
-        <input type="text" ref={passwordRef} placeholder='Password:'/>
-        <input type="text" ref={passwordConfirmRef} placeholder='Confirm Password:'/>
+        <input type="text" ref={phoneRef} placeholder='Phone:'/>
+        <input type="text" ref={locationRef} placeholder='Location:'/>
+        <input type="password" ref={passwordRef} placeholder='Password:'/>
+        <input type="password" ref={passwordConfirmRef} placeholder='Confirm Password:'/>
         <button type='submit'>Submit</button>
-        {error && <div>{error}</div>} {/* Display error message */}
+        {error && <div>{error}</div>}
       </form>
     </div>
   );
 }
 
-export default Form;,
-
-
-
+export default Form;
