@@ -15,3 +15,5 @@ post '/login', to: 'users#login'
 
   root 'categories#index', format: 'json'
 end
+
+
