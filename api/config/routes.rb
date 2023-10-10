@@ -7,9 +7,11 @@ post '/login', to: 'users#login'
 
   resources :categories, param: :slug, only: [:index, :show] do
     resources :subcategories, param: :slug, only: [:index, :show] do
+      resources :groups, param: :group_slug do
       resources :products, param: :slug, only: [:index, :show]
     end
   end
+end
 
   # :create, :update, :destroy
 
