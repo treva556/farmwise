@@ -23,11 +23,14 @@ import createProduct from '../Seller/Productform';
 
 
 function AppRouter() {
+  const [user, setUser] = React.useState(null);
+
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginShop />} />
+        <Route path="/login" element={<LoginShop setUser={setUser}/>} />
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard/>} />

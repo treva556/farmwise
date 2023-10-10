@@ -1,10 +1,12 @@
 
 
 
+
+
 class UsersController < ApplicationController
 
   # skip_before_action :verify_authenticity_token, only: [:register]
-  # skip_before_action :verify_authenticity_token, only: [:login]
+  skip_before_action :verify_authenticity_token, only: [:login]
 
 
   before_action :set_user, only: [:show, :update, :destroy]
@@ -26,16 +28,27 @@ class UsersController < ApplicationController
       Rails.logger.debug("Validation errors: #{user.errors.full_messages.join(', ')}")
       render json: { error: user.errors.full_messages }, status: :unprocessable_entity
     end
-  rescue StandardError => e
+     rescue StandardError => e
     render json: { error: e.message }, status: :internal_server_error
+     end
   end
-  end
+
+
 
 
   # def create
 
+
+
   def login
+
+
+
+    Rails.logger.debug("Login action triggered")
+
     user = User.find_by(email: params[:email])
+    Rails.logger.debug("user found: #{user.inspect}")
+    
     if user && user.authenticate(params[:password])
       token = user.generate_jwt
       render json: { token: token }
@@ -82,7 +95,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:location, :email, :phone_number, :name, :image, :password, :password_confirmation)
+    params.require(:user).permit(:location, :email, :phone_number, :name, :password, :password_confirmation)
   end
 
   def authorize_user
@@ -92,6 +105,7 @@ class UsersController < ApplicationController
   end
 end
 
-end
+
+
 
 

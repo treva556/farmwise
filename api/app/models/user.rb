@@ -21,8 +21,9 @@ class User < ApplicationRecord
   # ... Other user-related associations and methods
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true length: { minimum: 3}# Add a minimum length requirement here
+  validates :email, presence: true
+  # uniqueness: true
+  validates :password, presence: true, length: { minimum: 3}# Add a minimum length requirement here
 
 end
 
