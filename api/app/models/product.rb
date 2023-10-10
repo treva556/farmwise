@@ -1,6 +1,5 @@
-
 class Product < ApplicationRecord
-  validates :name, presence: true, uniqueness: { scope: :subcategory_id }
+  validates :name, presence: true, uniqueness: { scope: :group_id }
 
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :description, presence: true
@@ -9,7 +8,5 @@ class Product < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
-
-  belongs_to :subcategory
+  belongs_to :group
 end
-

@@ -32,26 +32,26 @@ class ProductsController < ApplicationController
 
   def set_category
     if params[:subcategory_slug].present?
+      @subcategory = Subcategory.find_by(slug: params[:subcategory_slug])
+      @category = @subcategory&.category
+    elsif params[:category_slug].present?
       @category = Category.find_by(slug: params[:category_slug])
     else
-      @category = Category.find_by(slug: params[:category_slug])
+      @category = Category.find_by(slug: 'default') # Replace with your default category
     end
   
     render json: { error: 'Category not found' }, status: :not_found unless @category
   end
-
+  
   def set_product
-
     Rails.logger.debug("Params: #{params.inspect}")
-
+  
     # Find product by slug within the category
     @product = @category.products.find_by(slug: params[:slug])
   
-    # If the product is not found by slug, set it to nil
-    @product = nil unless @product
-
-    Rails.logger.debug("Product: #{@product}")
-
+    unless @product
+      render json: { error: 'Product not found' }, status: :not_found
+    end
   end
 
   def product_params

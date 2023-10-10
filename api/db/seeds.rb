@@ -1,5 +1,3 @@
-
-
 # Create users
 users = User.create([
   { username: 'user1', email: 'user1@example.com', password: 'password' },
@@ -7,30 +5,33 @@ users = User.create([
   # Add more users as needed
 ])
 
-# Create categories with slugs
-categories = Category.create([
-  { name: 'Animal Produce', slug: 'animalproduce' },
-  { name: 'Plant Produce & Inputs', slug: 'plantproduce' },
-  # Add more categories as needed
-])
+# Create Categories
+Category.create(name: 'Animal Produce', slug: 'animalproduce')
 
-# Create subcategories with slugs and their respective categories
-subcategories = Subcategory.create([
-  { name: 'Meat', slug: 'meat', category: categories.first },
-  { name: 'Manure', slug: 'manure', category: categories.first },
-  { name: 'Fertilizers', slug: 'fertilizers', category: categories.second },
-  # Add more subcategories as needed
-])
+# Create Subcategories
+animal_produce = Category.find_by(slug: 'animalproduce')
+Subcategory.create(name: 'Meat', category: animal_produce, slug: 'meat')
+Subcategory.create(name: 'Manure', category: animal_produce, slug: 'manure')
 
-# Create products with slugs, descriptions, and their respective subcategories and categories
-products = Product.create([
-  { name: 'Chicken Meat', slug: 'chicken-meat', description: 'Description for Chicken Meat', price: 10, image: 'product1.jpg', location: 'Location 1', user: users.first, subcategory: subcategories.first, category: categories.first },
-  { name: 'Chicken Manure', slug: 'chicken-manure', description: 'Description for Chicken Manure', price: 15, image: 'product2.jpg', location: 'Location 2', user: users.second, subcategory: subcategories.second, category: categories.first },
-  { name: 'NPK Fertilizer', slug: 'npk-fertilizer', description: 'Description for NPK Fertilizer', price: 20, image: 'product3.jpg', location: 'Location 3', user: users.first, subcategory: subcategories.third, category: categories.second },
-  # Add more products as needed
-])
+# Create Groups
+meat = Subcategory.find_by(slug: 'meat')
+Group.create(name: 'Chicken Meat', subcategory: meat, slug: 'chicken-meat')
+
+# Ensure at least one user exists before creating the product
+user = User.first
+
+# Create Products
+chicken_meat_group = Group.find_by(slug: 'chicken-meat')
+Product.create(
+  name: 'Fresh Chicken Breast',
+  price: 10,
+  description: 'Premium quality chicken breast',
+  image: 'chicken-breast.jpg',
+  location: 'Farm A',
+  user: user, # Set the product's user association
+  category: animal_produce,
+  group: chicken_meat_group,
+  slug: '1'
+)
 
 puts 'Seed data created successfully!'
-
-
-user = User.new(name: 'Mark Trevor',phone_number: '0795116244',location: 'Kiambu, Kiambu',email: 'marktreva99@gmail.com',password: 'your_password_here',)
