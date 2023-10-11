@@ -74,7 +74,7 @@ import { Link } from 'react-router-dom';
         >
           Search
         </button>
-        <Link to="/sellerform">
+        <Link to="/form">
         <button 
           type="button"
           className="bg-green-500 text-white rounded-r px-2 md:px-3 py-0 md:py-1"

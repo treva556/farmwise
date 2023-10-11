@@ -3,6 +3,9 @@
 
 
 
+
+
+
 class UsersController < ApplicationController
 
   # skip_before_action :verify_authenticity_token, only: [:register]
@@ -48,7 +51,7 @@ class UsersController < ApplicationController
 
     user = User.find_by(email: params[:email])
     Rails.logger.debug("user found: #{user.inspect}")
-    
+
     if user && user.authenticate(params[:password])
       token = user.generate_jwt
       render json: { token: token }

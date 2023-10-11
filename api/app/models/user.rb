@@ -1,5 +1,8 @@
 
 
+
+
+
 class User < ApplicationRecord
     enum role: [:user, :seller, :admin]
   
