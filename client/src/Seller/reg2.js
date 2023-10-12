@@ -24,12 +24,14 @@ function Form() {
     e.preventDefault();
   
     const formData = {
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      phone_number: phoneRef.current.value,
-      location: locationRef.current.value,
-      password: passwordRef.current.value,
-      password_confirmation: passwordConfirmRef.current.value
+      user: {
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        phone_number: phoneRef.current.value,
+        location: locationRef.current.value,
+        password: passwordRef.current.value,
+        password_confirmation: passwordConfirmRef.current.value
+      }
     };
   
     try {
@@ -44,7 +46,7 @@ function Form() {
       }
     }
   };
-
+  
 
   console.log(formData)
 
