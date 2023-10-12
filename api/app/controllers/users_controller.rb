@@ -2,13 +2,9 @@
 
 
 
-
-
-
-
 class UsersController < ApplicationController
 
-  # skip_before_action :verify_authenticity_token, only: [:register]
+  skip_before_action :verify_authenticity_token, only: [:register]
   skip_before_action :verify_authenticity_token, only: [:login]
 
 
@@ -16,41 +12,22 @@ class UsersController < ApplicationController
   before_action :authorize_user, only: [:update, :destroy]
 
 
-  def register
-
-    begin
-
-    Rails.logger.debug("Register action triggered")
-    Rails.logger.debug("Received parameters: #{params.inspect}")
-  
-    user = User.create(user_params)
-    if user.valid?
-      token = user.generate_jwt
-      render json: { token: token, message: 'Registration successful' }, status: :created
-    else
-      Rails.logger.debug("Validation errors: #{user.errors.full_messages.join(', ')}")
-      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
-    end
-     rescue StandardError => e
-    render json: { error: e.message }, status: :internal_server_error
-     end
-  end
-
-
 
 
   # def create
 
-
+  def register
+    user = User.new(user_params)
+    if user.save
+      token = user.generate_jwt
+      render json: { user: user, token: token, message: 'Registration successful' }, status: :created
+    else
+      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
   def login
-
-
-
-    Rails.logger.debug("Login action triggered")
-
     user = User.find_by(email: params[:email])
-    Rails.logger.debug("user found: #{user.inspect}")
 
     if user && user.authenticate(params[:password])
       token = user.generate_jwt
@@ -60,10 +37,12 @@ class UsersController < ApplicationController
     end
   end
 
+  
+
   # GET /users
   def index
     @users = User.all
-    render json: @users
+    render json: { users: @users }  # Wrap users inside a key named "users"
   end
 
   # GET /users/:id
@@ -107,8 +86,5 @@ class UsersController < ApplicationController
     end
   end
 end
-
-
-
 
 
