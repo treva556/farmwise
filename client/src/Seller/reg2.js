@@ -1,9 +1,5 @@
 
 
-
-
-
-
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
@@ -13,7 +9,7 @@ function Form() {
   const phoneRef = useRef();
   const locationRef = useRef();
   const passwordRef = useRef();
-  // const passwordConfirmRef = useRef();
+  const passwordConfirmRef = useRef();
 
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
@@ -21,23 +17,21 @@ function Form() {
     email: '',
     phone_number: '',
     location: '',
-    password: ''
-    // password_confirmation: '' // Changed to match Rails controller parameter
+    password: '',
+    password_confirmation: '' // Changed to match Rails controller parameter
   });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Update form_data state with the latest input values
-    setFormData({
+  
+    const formData = {
       name: nameRef.current.value,
       email: emailRef.current.value,
       phone_number: phoneRef.current.value,
       location: locationRef.current.value,
-      password: passwordRef.current.value
-      // password_confirmation: passwordConfirmRef.current.value // Changed to match Rails controller parameter
-    });
-
+      password: passwordRef.current.value,
+      password_confirmation: passwordConfirmRef.current.value
+    };
+  
     try {
       const res = await axios.post("http://localhost:3000/register", formData);
       console.log('Response from server:', res.data);
@@ -50,6 +44,8 @@ function Form() {
       }
     }
   };
+
+
   console.log(formData)
 
   return (
@@ -60,7 +56,7 @@ function Form() {
         <input type="text" ref={phoneRef} placeholder='Phone:'/>
         <input type="text" ref={locationRef} placeholder='Location:'/>
         <input type="password" ref={passwordRef} placeholder='Password:'/>
-        {/* <input type="password" ref={passwordConfirmRef} placeholder='Confirm Password:'/> */}
+        <input type="password" ref={passwordConfirmRef} placeholder='Confirm Password:'/>
         <button type='submit'>Submit</button>
         {error && <div>{error}</div>}
       </form>
