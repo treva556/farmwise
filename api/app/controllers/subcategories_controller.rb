@@ -1,5 +1,8 @@
 
 
+
+
+
 class SubcategoriesController < ApplicationController
   before_action :set_category
   before_action :set_subcategory, only: [:show, :edit, :update, :destroy]

@@ -6,6 +6,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/register', headers: :any, methods: [:post]
     resource '/login', headers: :any, methods: [:post]
     resource '/categories.json', headers: :any, methods: [:get]
+    resource '/categories/categorySlug/subcategory.json', headers: :any, methods: [:get]
+    resource '/categories/:category_slug/subcategories.json', headers: :any, methods: [:get] # Add this line to allow the specific route
 
     # Add other routes as needed
   end
@@ -13,5 +15,3 @@ end
 
 
 
-
-  

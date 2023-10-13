@@ -1,12 +1,8 @@
 
 
-# Create users
-users = User.create([
-  { name: 'huity fre', email: 'user6@example.com', password: 'password' },
-  { name: 'poiyui li', email: 'user6@example.com', password: 'password' },
-  # Add more users as needed
+subcategories_equipments = Category.find_by(name: 'Equipments and Services').subcategories.create([
+  { name: 'Services', slug: 'services' }
+  # Add more subcategories for 'Equipments and Services' category as needed
 ])
 
-
-
-
+puts 'Seed data has been created successfully.'
