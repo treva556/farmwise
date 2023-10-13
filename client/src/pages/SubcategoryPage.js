@@ -54,7 +54,7 @@ function SubcategoryPage() {
             to={`/categories/${categorySlug}/subcategories/${subcategory.slug}/products`}
             className="text-green-600 font-semibold hover:underline"
           >
-            View Products
+            View Groups
           </Link>
         </div>
       ))}

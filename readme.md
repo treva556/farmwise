@@ -13,3 +13,6 @@
 ## Author  & license
 - Mark Trevor
 marktreva92@gmail.com
+
+### Routes
+  <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/products" element={<ProductPage/>} />
