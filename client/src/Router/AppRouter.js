@@ -33,10 +33,10 @@ function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginShop setUser={setUser}/>} />
+        <Route path="/login" element={<LoginShop/>} />
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
-        <Route path="/sellershop" element={<UserDashboard/>} />
+        <Route path="/sellershop" element={<UserDashboard user={user} />} />
 
         
         <Route path="/form" element={<Form/>} />
