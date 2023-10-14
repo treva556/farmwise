@@ -33,7 +33,7 @@ function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginShop/>} />
+        <Route path="/login" element={<LoginShop setUser={setUser} />} /> {/* Pass setUser as a prop */}
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard user={user} />} />
@@ -67,3 +67,4 @@ export default AppRouter;
 
 
 // marktreva11@example.com
+// Trevamark113_

@@ -2,16 +2,15 @@
 
 
 
-
-
-
 import React, { useRef } from "react";
+// import UserDashboard from "./Shop";
 import { useNavigate } from "react-router-dom";
+
 
 const LoginShop = ({ setUser }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const history = useNavigate(); // Get the history object from React Router
+  const navigate = useNavigate(); // Get the history object from React Router
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +30,7 @@ const LoginShop = ({ setUser }) => {
         const data = await response.json();
         setUser(data.user); // Update user state
         localStorage.setItem("token", data.token); // Store token in localStorage
-        history.push("/sellershop"); // Redirect to the user dashboard route after successful login
+        navigate("/sellershop"); // Redirect to the user dashboard route after successful login
       } else {
         console.error("Login error:", response.status);
         // Handle login error (show error message, etc.)

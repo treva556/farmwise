@@ -8,6 +8,11 @@ import React from "react";
 // import LogoutButton from "./LogoutButton";
 
 const UserDashboard = ({ user }) => {
+  if (!user) {
+    // Handle the case when the user is not defined or not yet loaded
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="dashboard">
       <h1>Welcome, {user.name}!</h1>
@@ -20,3 +25,4 @@ const UserDashboard = ({ user }) => {
 };
 
 export default UserDashboard;
+
