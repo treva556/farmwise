@@ -1,9 +1,5 @@
 
 
-
-
-
-
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from '../pages/Homepage';
@@ -30,6 +26,19 @@ import Groups from '../pages/Groups';
 function AppRouter() {
   const [user, setUser] = React.useState(null);
 
+
+  // useEffect(() => {
+  //   // Make an API call to fetch the user data here
+  //   // For example:
+  //   fetch('http://localhost:3000/user-data') // Replace with the correct API endpoint
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUser(data); // Assuming that the API response contains user data
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching user data:', error);
+  //     });
+  // }, []); 
 
   return (
     <BrowserRouter>
@@ -69,5 +78,10 @@ export default AppRouter;
 
 
 
-// marktreva11@example.com
-// Trevamark113_
+//  marktreva11@example.com
+//  Trevamark113_
+
+
+
+//  marktreva12@example.com
+//  youyou78

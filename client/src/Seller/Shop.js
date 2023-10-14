@@ -1,13 +1,11 @@
 
 
 
-
 import React from "react";
-// import ProductList from "./ProductList";
-// import ProductForm from "./ProductForm";
-// import LogoutButton from "./LogoutButton";
 
 const UserDashboard = ({ user }) => {
+  console.log('User data:', user);
+
   if (!user) {
     // Handle the case when the user is not defined or not yet loaded
     return <div>Loading...</div>;
@@ -15,14 +13,22 @@ const UserDashboard = ({ user }) => {
 
   return (
     <div className="dashboard">
-      <h1>Welcome, {user.name}!</h1>
+      <h1>Welcome, {user.email}!</h1>
       {/* Render user-specific content and actions */}
-      {/* <ProductList products={user.products} />
-      <ProductForm />
+      {/* <ProductList products={user.products} /> */}
+      {/* <ProductForm />
       <LogoutButton /> */}
     </div>
   );
 };
 
 export default UserDashboard;
+
+// marktreva12@example.com
+//  youyou78
+
+
+
+
+
 
