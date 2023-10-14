@@ -11,26 +11,27 @@ import Form from '../Seller/reg2';
 // import Layout from '../Admin/Layout';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
-import ProductPage from '../pages/ProductPage';
+// import ProductPage from '../pages/ProductPage';
 
 import Shops from '../Admin/Shops';
 import Pendingshops from '../Admin/Pendingshops';
 import Addcategory from '../Admin/addcategory';
 import Allusers from '../Admin/Userspage';
 import UserDashboard from '../Seller/Shop';
-import LoginShop from '../Seller/Login';
-import createProduct from '../Seller/Productform';
+// import LoginShop from '../Seller/Login';
+// import createProduct from '../Seller/Productform';
+import Groups from '../pages/Groups';
 
 
 function AppRouter() {
-  const [user, setUser] = React.useState(null);
+  // const [user, setUser] = React.useState(null);
 
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginShop setUser={setUser}/>} />
+        {/* <Route path="/login" element={<LoginShop setUser={setUser}/>} /> */}
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard/>} />
@@ -46,7 +47,7 @@ function AppRouter() {
 
 
         {/* Subcategory and Product routes */}
-         <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/products" element={<ProductPage/>} />
+         <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
          <Route path="/categories/:categorySlug/subcategories" element={<SubcategoryPage/>} /> 
 
 

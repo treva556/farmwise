@@ -19,11 +19,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    unless @product
-      render json: { error: 'Product not found' }, status: :not_found
-    else
-      render json: @product
-    end
+    @product = @group.products.find_by(slug: params[:slug])
+    render_product_not_found unless @product
   end
 
   # Implement other controller actions as needed (create, update, destroy)

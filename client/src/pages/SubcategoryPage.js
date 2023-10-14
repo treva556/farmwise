@@ -51,7 +51,7 @@ function SubcategoryPage() {
           <h1 className="text-2xl font-semibold mb-4">{subcategory.name}</h1>
           <p className="text-gray-700 mb-2">{subcategory.description}</p>
           <Link
-            to={`/categories/${categorySlug}/subcategories/${subcategory.slug}/products`}
+            to={`/categories/${categorySlug}/subcategories/${subcategory.slug}/groups`}
             className="text-green-600 font-semibold hover:underline"
           >
             View Groups

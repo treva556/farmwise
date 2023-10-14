@@ -1,40 +1,21 @@
-# Create Categories
-categories = Category.create([
-  { name: 'Farm Produce', slug: 'farm-produce' },
-  { name: 'Equipments and Services', slug: 'equipments-services' }
-])
+# Find the subcategories you want to work with
+subcategory_fertilizers = Subcategory.find_by(name: 'Fertilizers')
 
-# Create Subcategories
-subcategories_farm_produce = categories[0].subcategories.create([
-  { name: 'Fertilizers', slug: 'fertilizers' },
-  { name: 'Crops', slug: 'crops' }
-])
+# Create groups under the subcategory
+group_organic_fertilizers = subcategory_fertilizers.groups.create(
+  name: 'Organic Fertilizers',
+  slug: 'organic-fertilizers'
+)
 
-subcategories_equipments = categories[1].subcategories.create([
-  { name: 'Services', slug: 'services' },
-  { name: 'Equipments', slug: 'equipments' }
-])
+# Create products under the group
+product1 = group_organic_fertilizers.products.create(
+  name: 'Product 1 Name',
+  slug: 'product-1-slug'
+)
 
-# Create Groups
-groups_fertilizers = subcategories_farm_produce[0].groups.create([
-  { name: 'Organic Fertilizers', slug: 'organic-fertilizers' },
-  { name: 'Inorganic Fertilizers', slug: 'inorganic-fertilizers' }
-])
-
-groups_services = subcategories_equipments[0].groups.create([
-  { name: 'Consulting', slug: 'consulting' },
-  { name: 'Maintenance', slug: 'maintenance' }
-])
-
-# Create Products
-products_organic_fertilizers = groups_fertilizers[0].products.create([
-  { name: 'Natural Plant Fertilizer', slug: 'natural-plant-fertilizer' },
-  { name: 'Compost Fertilizer', slug: 'compost-fertilizer' }
-])
-
-products_consulting = groups_services[0].products.create([
-  { name: 'Agricultural Consulting Service', slug: 'agricultural-consulting-service' },
-  { name: 'Soil Testing Service', slug: 'soil-testing-service' }
-])
+product2 = group_organic_fertilizers.products.create(
+  name: 'Product 2 Name',
+  slug: 'product-2-slug'
+)
 
 puts 'Seed data has been created successfully.'
