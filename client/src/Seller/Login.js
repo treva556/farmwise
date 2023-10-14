@@ -1,9 +1,7 @@
 
 
 
-
-
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginShop = ({ setUser }) => {
@@ -24,16 +22,12 @@ const LoginShop = ({ setUser }) => {
           password: passwordRef.current.value,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-
-
-        console.log('Data received from server:', data); // Log user data after setting it
         setUser(data.user);
         localStorage.setItem("token", data.token);
         navigate("/sellershop");
-        
       } else {
         console.error("Login error:", response.status);
         // Handle login error (show error message, etc.)
@@ -43,6 +37,14 @@ const LoginShop = ({ setUser }) => {
       // Handle login error (show error message, etc.)
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // ... (same as before)
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="login-form">
