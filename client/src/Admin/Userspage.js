@@ -10,7 +10,7 @@ function Allusers() {
     fetch("http://localhost:3000/users.json")
       .then((response) => response.json())
       .then((data) => {
-        setUsers(data);
+        setUsers(data.users); // Access the "users" key in the response data
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
@@ -23,7 +23,7 @@ function Allusers() {
       <Sidebar/>
 
     </div>
-    <div className="bg-green-600 p-8">
+    <div className="bg-w-600 p-8">
      
       <h1 className="text-3xl font-semibold text-white mb-8">All Users</h1>
       {users.length > 0 ? (
