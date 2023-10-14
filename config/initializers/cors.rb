@@ -1,6 +1,17 @@
+
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins 'http://localhost:3001' # Replace this with your React frontend's domain in production
-      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
-    end
+  allow do
+    origins 'http://localhost:3001' # Replace with the actual domain of your React app
+    resource '/register', headers: :any, methods: [:post]
+    resource '/login', headers: :any, methods: [:post]
+    resource '/categories.json', headers: :any, methods: [:get]
+    resource '/categories/categorySlug/subcategory.json', headers: :any, methods: [:get]
+    resource '/categories/:category_slug/subcategories.json', headers: :any, methods: [:get] # Add this line to allow the specific route
+
+    # Add other routes as needed
   end
+end
+
+
+

@@ -1,3 +1,5 @@
+
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -21,6 +23,11 @@ gem "importmap-rails"
 # image uploader gem
 gem 'carrierwave'
 
+
+#authent
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt', '~> 2.2'
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
@@ -30,12 +37,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-
-gem 'rack-cors', require: 'rack/cors'
+gem 'rack-cors'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
-gem 'bcrypt', '~> 3.1.7' # You can specify a version or use a different one
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

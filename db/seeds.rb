@@ -1,36 +1,40 @@
-
-
-# Create users
-users = User.create([
-  { username: 'user1', email: 'user1@example.com', password: 'password' },
-  { username: 'user2', email: 'user2@example.com', password: 'password' },
-  # Add more users as needed
-])
-
-# Create categories with slugs
+# Create Categories
 categories = Category.create([
-  { name: 'Animal Produce', slug: 'animalproduce' },
-  { name: 'Plant Produce & Inputs', slug: 'plantproduce' },
-  # Add more categories as needed
+  { name: 'Farm Produce', slug: 'farm-produce' },
+  { name: 'Equipments and Services', slug: 'equipments-services' }
 ])
 
-# Create subcategories with slugs and their respective categories
-subcategories = Subcategory.create([
-  { name: 'Meat', slug: 'meat', category: categories.first },
-  { name: 'Manure', slug: 'manure', category: categories.first },
-  { name: 'Fertilizers', slug: 'fertilizers', category: categories.second },
-  # Add more subcategories as needed
+# Create Subcategories
+subcategories_farm_produce = categories[0].subcategories.create([
+  { name: 'Fertilizers', slug: 'fertilizers' },
+  { name: 'Crops', slug: 'crops' }
 ])
 
-# Create products with slugs, descriptions, and their respective subcategories and categories
-products = Product.create([
-  { name: 'Chicken Meat', slug: 'chicken-meat', description: 'Description for Chicken Meat', price: 10, image: 'product1.jpg', location: 'Location 1', user: users.first, subcategory: subcategories.first, category: categories.first },
-  { name: 'Chicken Manure', slug: 'chicken-manure', description: 'Description for Chicken Manure', price: 15, image: 'product2.jpg', location: 'Location 2', user: users.second, subcategory: subcategories.second, category: categories.first },
-  { name: 'NPK Fertilizer', slug: 'npk-fertilizer', description: 'Description for NPK Fertilizer', price: 20, image: 'product3.jpg', location: 'Location 3', user: users.first, subcategory: subcategories.third, category: categories.second },
-  # Add more products as needed
+subcategories_equipments = categories[1].subcategories.create([
+  { name: 'Services', slug: 'services' },
+  { name: 'Equipments', slug: 'equipments' }
 ])
 
-puts 'Seed data created successfully!'
+# Create Groups
+groups_fertilizers = subcategories_farm_produce[0].groups.create([
+  { name: 'Organic Fertilizers', slug: 'organic-fertilizers' },
+  { name: 'Inorganic Fertilizers', slug: 'inorganic-fertilizers' }
+])
 
+groups_services = subcategories_equipments[0].groups.create([
+  { name: 'Consulting', slug: 'consulting' },
+  { name: 'Maintenance', slug: 'maintenance' }
+])
 
-user = User.new(name: 'Mark Trevor',phone_number: '0795116244',location: 'Kiambu, Kiambu',email: 'marktreva99@gmail.com',password: 'your_password_here',)
+# Create Products
+products_organic_fertilizers = groups_fertilizers[0].products.create([
+  { name: 'Natural Plant Fertilizer', slug: 'natural-plant-fertilizer' },
+  { name: 'Compost Fertilizer', slug: 'compost-fertilizer' }
+])
+
+products_consulting = groups_services[0].products.create([
+  { name: 'Agricultural Consulting Service', slug: 'agricultural-consulting-service' },
+  { name: 'Soil Testing Service', slug: 'soil-testing-service' }
+])
+
+puts 'Seed data has been created successfully.'
