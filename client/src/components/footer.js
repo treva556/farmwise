@@ -10,7 +10,7 @@ function Footer() {
           </div>
           <div className="flex flex-col space-y-3">
             <h1>Company</h1>
-            <a className="text-sm text-gray-400" href="/">
+            <a className="text-sm text-gray-400" href="/about">
               About us
             </a>
             <a className="text-sm text-gray-400" href="/">

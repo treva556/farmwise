@@ -10,10 +10,12 @@ import Home from '../pages/Homepage';
 import Searchpage from '../pages/Searchpage';
 import Adminprofile from '../Admin/Adminprofile';
 import Form from '../Seller/reg2';
+import About from '../components/Aboutus';
 // import Layout from '../Admin/Layout';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
+import TermsandCond from '../Seller/T&C';
 
 import Shops from '../Admin/Shops';
 import Pendingshops from '../Admin/Pendingshops';
@@ -37,10 +39,11 @@ function AppRouter() {
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/sellershop" element={<UserDashboard user={user} />} />
-
+        <Route path="/about" element={<About/>} />
         
         <Route path="/form" element={<Form/>} />
         <Route path="/create" element={<createProduct/>} />
+        <Route path="/terms" element={<TermsandCond/>} />
 
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
