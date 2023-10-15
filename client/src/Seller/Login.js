@@ -1,11 +1,13 @@
 
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {  useAuth } from "./AuthContext" // Import the useAuth hook
 
-const LoginShop = ({ setUser }) => {
+const LoginShop = () => {
+  const { setUser } = useAuth(); // Access setUser from the context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,29 +24,25 @@ const LoginShop = ({ setUser }) => {
         }),
       });
 
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        navigate("/sellershop");
+      } else {
+        // Handle login error
+        setError("Invalid email or password"); // Set an appropriate error message
+      }
     } catch (error) {
-      console.log(error);
-  
+      console.error("Login error:", error);
+      setError("Error occurred while logging in"); // Set a generic error message for unexpected errors
+    }
   };
-  const [user, setUser] = useState({
-    id: null,
-    name: "",
-    email: "",
-    // other user properties
-  });
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // ... (same as before)
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div className="login-form">
       <h2>Login</h2>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -67,3 +65,6 @@ const LoginShop = ({ setUser }) => {
 };
 
 export default LoginShop;
+
+
+

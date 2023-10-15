@@ -1,6 +1,9 @@
 
 
 import React, { useState } from 'react';
+import { UserContext } from '../Seller/AuthContextProvider';
+import { UserProvider, useAuth } from '../Seller/AuthContextProvider'; // Adjust the path accordingly
+
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from '../pages/Homepage';
@@ -22,20 +25,24 @@ import UserDashboard from '../Seller/Shop';
 import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
 import Groups from '../pages/Groups';
+import { formToJSON } from 'axios';
 
 function AppRouter() {
+  const { user, setUser } = useAuth(); // Use the custom hook to get user data
+
  
 
 
   const [loading, setLoading] = useState(true); // Loading state
 
   return (
+    <UserProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sellershop" element={<UserDashboard user={user}  loading={loading}/>} />
+        <Route path="/sellershop" element={<UserDashboard loading={loading}/>} />
 
-        <Route path="/login" element={<LoginShop setUser={setUser} setLoading={setLoading}/>} /> {/* Pass setUser as a prop */}
+        <Route path="/login" element={<LoginShop  setLoading={setLoading}/>} /> Pass setUser as a prop
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/about" element={<About/>} />
@@ -60,11 +67,19 @@ function AppRouter() {
 
 
       </Routes>
+       
     </BrowserRouter>
+    </UserProvider>
   );
 }
 
 export default AppRouter;
+
+
+
+
+
+
 
 
 
