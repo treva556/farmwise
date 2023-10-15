@@ -12,11 +12,11 @@ const Dashboard = () => {
 
   try {
     const userData = JSON.parse(userDataString);
-    const { email } = userData;
+    const { name, email } = userData;
 
     return (
       <div className=" bg-green-800">
-        <h1>Welcome</h1>
+        <h1>Welcome {name}</h1>
         <p className=" text-yellow-300">Email: {email}</p>
         <button className=" bg-white"> Add Product</button>
         {/* Render user-specific content and actions */}
