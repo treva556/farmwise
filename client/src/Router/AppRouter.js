@@ -23,32 +23,21 @@ import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
 import Groups from '../pages/Groups';
 
-
 function AppRouter() {
-  const [user, setUser] = React.useState(null);
+ 
 
 
-  // useEffect(() => {
-  //   // Make an API call to fetch the user data here
-  //   // For example:
-  //   fetch('http://localhost:3000/user-data') // Replace with the correct API endpoint
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setUser(data); // Assuming that the API response contains user data
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching user data:', error);
-  //     });
-  // }, []); 
+  const [loading, setLoading] = useState(true); // Loading state
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginShop setUser={setUser} />} /> {/* Pass setUser as a prop */}
+        <Route path="/sellershop" element={<UserDashboard user={user}  loading={loading}/>} />
+
+        <Route path="/login" element={<LoginShop setUser={setUser} setLoading={setLoading}/>} /> {/* Pass setUser as a prop */}
         <Route path="/search" element={<Searchpage />} />
         <Route path="/admin" element={<Adminprofile />} />
-        <Route path="/sellershop" element={<UserDashboard user={user} />} />
         <Route path="/about" element={<About/>} />
         
         <Route path="/form" element={<Form/>} />

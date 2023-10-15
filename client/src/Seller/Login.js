@@ -1,12 +1,11 @@
 
 
-
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginShop = ({ setUser }) => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,25 +17,22 @@ const LoginShop = ({ setUser }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: emailRef.current.value,
-          password: passwordRef.current.value,
+          email: email,
+          password: password,
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-        localStorage.setItem("token", data.token);
-        navigate("/sellershop");
-      } else {
-        console.error("Login error:", response.status);
-        // Handle login error (show error message, etc.)
-      }
     } catch (error) {
-      console.error("Login error:", error);
-      // Handle login error (show error message, etc.)
-    }
+      console.log(error);
+  
   };
+  const [user, setUser] = useState({
+    id: null,
+    name: "",
+    email: "",
+    // other user properties
+  });
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,13 +49,15 @@ const LoginShop = ({ setUser }) => {
         <input
           type="email"
           placeholder="Email"
-          ref={emailRef}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Password"
-          ref={passwordRef}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <button type="submit">Login</button>
