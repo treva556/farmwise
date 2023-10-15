@@ -33,7 +33,7 @@ function AppRouter() {
 
 
   return (
-    <UserProvider>
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -66,7 +66,6 @@ function AppRouter() {
       </Routes>
        
     </BrowserRouter>
-    </UserProvider>
   );
 }
 

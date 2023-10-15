@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+
+
+
+
+
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginShop = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+const LoginShop = ({ setUser }) => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,44 +20,52 @@ const LoginShop = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Save user data and token in localStorage
-        localStorage.setItem("user", JSON.stringify(data.user));
+        console.log("Server Response:", data); // Log the entire response to inspect the structure
+
+        // setUser(data.user);
         localStorage.setItem("token", data.token);
+        console.log("User data stored in localStorage:", data.user);
+
         navigate("/sellershop");
       } else {
-        // Handle login error
-        setError("Invalid email or password");
+        console.error("Login error:", response.status);
+        // Handle login error (show error message, etc.)
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("Error occurred while logging in");
+      // Handle login error (show error message, etc.)
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // ... (same as before)
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="login-form">
       <h2>Login</h2>
-      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={emailRef}
           required
         />
         <input
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          ref={passwordRef}
           required
         />
         <button type="submit">Login</button>
@@ -63,3 +75,8 @@ const LoginShop = () => {
 };
 
 export default LoginShop;
+
+
+
+
+

@@ -1,32 +1,46 @@
 
-
 import React from "react";
 
-const UserDashboard = ({ user }) => {
-  console.log('User data:', user);
+const Dashboard = () => {
+  // Retrieve user data from localStorage
+  const userDataString = localStorage.getItem("user");
 
-  if (!user) {
-    // Handle the case when the user object is not defined or not yet loaded
-    return <div>Loading...</div>;
+  // Check if user data is available in localStorage
+  if (!userDataString) {
+    // Handle the case when user data is not found in localStorage
+    return <div>User data not found...</div>;
   }
 
-  if (!user.email) {
-    // Handle the case when the user email is not defined or falsy
-    return <div>Email not found...</div>;
-  }
+  let userData;
+  try {
+    // Attempt to parse the user data string
+    userData = JSON.parse(userDataString);
+    console.log(userData);
 
-  return (
-    <div className="dashboard">
-      <h1>Welcome, {user.email}!</h1>
-      {/* Render user-specific content and actions */}
-      {/* <ProductList products={user.products} /> */}
-      {/* <ProductForm />
-      <LogoutButton /> */}
-    </div>
-  );
+    // Extract name and email from user data
+    const { email } = userData;
+
+    return (
+      <div className="dashboard">
+        <h1>Welcome</h1>
+        <p>Email: {email}</p>
+        {/* Render user-specific content and actions */}
+        {/* Add buttons to delete account, add products, etc. */}
+      </div>
+    );
+  } catch (error) {
+    // Handle JSON parsing error
+    console.error("Error parsing user data from localStorage:", error);
+    return <div>Error loading user data...</div>;
+  }
 };
 
-export default UserDashboard;
+export default Dashboard;
+
+
+
+
+
 
 
 
