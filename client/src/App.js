@@ -1,6 +1,5 @@
 
 
-import { UserProvider } from "../src/Seller/AuthContextProvider" // Adjust the import path
 
 import React from 'react';
 import './App.css';

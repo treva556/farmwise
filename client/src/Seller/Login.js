@@ -1,10 +1,7 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {  useAuth } from "./AuthContext" // Import the useAuth hook
 
 const LoginShop = () => {
-  const { setUser } = useAuth(); // Access setUser from the context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -26,16 +23,17 @@ const LoginShop = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user);
+        // Save user data and token in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         navigate("/sellershop");
       } else {
         // Handle login error
-        setError("Invalid email or password"); // Set an appropriate error message
+        setError("Invalid email or password");
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("Error occurred while logging in"); // Set a generic error message for unexpected errors
+      setError("Error occurred while logging in");
     }
   };
 
@@ -65,6 +63,3 @@ const LoginShop = () => {
 };
 
 export default LoginShop;
-
-
-
