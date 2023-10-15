@@ -15,9 +15,10 @@ const Dashboard = () => {
     const { email } = userData;
 
     return (
-      <div className="dashboard">
+      <div className=" bg-green-800">
         <h1>Welcome</h1>
-        <p>Email: {email}</p>
+        <p className=" text-yellow-300">Email: {email}</p>
+        <button className=" bg-white"> Add Product</button>
         {/* Render user-specific content and actions */}
         {/* Add buttons to delete account, add products, etc. */}
       </div>
