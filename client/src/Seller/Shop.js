@@ -1,23 +1,17 @@
 
+
+
 import React from "react";
 
 const Dashboard = () => {
-  // Retrieve user data from localStorage
   const userDataString = localStorage.getItem("user");
 
-  // Check if user data is available in localStorage
   if (!userDataString) {
-    // Handle the case when user data is not found in localStorage
     return <div>User data not found...</div>;
   }
 
-  let userData;
   try {
-    // Attempt to parse the user data string
-    userData = JSON.parse(userDataString);
-    console.log(userData);
-
-    // Extract name and email from user data
+    const userData = JSON.parse(userDataString);
     const { email } = userData;
 
     return (
@@ -29,11 +23,11 @@ const Dashboard = () => {
       </div>
     );
   } catch (error) {
-    // Handle JSON parsing error
     console.error("Error parsing user data from localStorage:", error);
     return <div>Error loading user data...</div>;
   }
 };
+
 
 export default Dashboard;
 

@@ -6,7 +6,7 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginShop = ({ setUser }) => {
+const LoginShop = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
@@ -30,8 +30,11 @@ const LoginShop = ({ setUser }) => {
         console.log("Server Response:", data); // Log the entire response to inspect the structure
 
         // setUser(data.user);
-        localStorage.setItem("token", data.token);
-        console.log("User data stored in localStorage:", data.user);
+ ////////////  yy  //////////////////////////////////////////////// 
+ localStorage.setItem("user", JSON.stringify(data.user));
+ localStorage.setItem("token", data.token);
+ 
+ console.log("User data stored in localStorage:", data.user);
 
         navigate("/sellershop");
       } else {
