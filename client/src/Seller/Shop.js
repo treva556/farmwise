@@ -22,7 +22,7 @@ const Dashboard = () => {
       <div className=" bg-green-800">
         <h1>Welcome {name}</h1>
         <p className=" text-yellow-200">Email: {email}</p>
-        <button className="bg-white rounded-sm mb-2"> Add Product</button>
+        <button className="bg-white rounded-sm mb-2"><Addproduct/></button>
         {/* Render user-specific content and actions */}
         {/* Add buttons to delete account, add products, etc. */}
       </div>

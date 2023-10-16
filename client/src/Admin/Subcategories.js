@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 
-function Addcategory() {
+function Subcategory() {
   return (
     <div className="flex">
          jiuuu
@@ -9,4 +9,4 @@ function Addcategory() {
   );
 }
 
-export default Addcategory;
+export default Subcategory;

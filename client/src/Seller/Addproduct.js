@@ -42,7 +42,7 @@ const AddProduct = () => {
         formData.append("images", productData.images[i]);
       }
 
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch("  http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/organic-fertilizers/products ", {
         method: "POST",
         headers: {
           // Include your authorization token if needed
