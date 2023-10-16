@@ -18,6 +18,17 @@ class ProductsController < ApplicationController
     render json: @products
   end
 
+
+  def create
+    @product = @group.products.new(product_params)
+
+    if @product.save
+      render json: @product, status: :created
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def show
     @product = @group.products.find_by(slug: params[:slug])
     render_product_not_found unless @product
@@ -40,19 +51,13 @@ class ProductsController < ApplicationController
     render json: { error: 'Category not found' }, status: :not_found unless @category
   end
   
-  def set_product
-    Rails.logger.debug("Params: #{params.inspect}")
-  
-    # Find product by slug within the category
-    @product = @category.products.find_by(slug: params[:slug])
-  
-    unless @product
-      render json: { error: 'Product not found' }, status: :not_found
-    end
+  def set_group
+    @group = Group.find_by(slug: params[:group_slug])
+    render json: { error: 'Group not found' }, status: :not_found unless @group
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :description, :image, :location, :user_id, :subcategory_id)
+    params.require(:product).permit(:name, :price, :description, :location, :user_id, :subcategory_id, images: [])
   end
 end
 

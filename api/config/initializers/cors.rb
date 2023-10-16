@@ -15,7 +15,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/categories/:category_slug/subcategories.json', headers: :any, methods: [:get] # Add this line to allow the specific route
     resource '/categories/:category_slug/subcategories/:subcategory_slug/groups.json', headers: :any, methods: [:get] # Add this line to allow the specific route
     resource '/categories/:categorySlug/subcategories/:subcategorySlug/groups.json', headers: :any, methods: [:get] # Add this line to allow the specific route
-   re 
+    resource '/categories/:category_slug/subcategories/:subcategory_slug/groups/:group_slug/products', headers: :any, methods: [:get, :post, :put, :patch, :delete],credentials: true
+
 
     # Add other routes as needed
   end

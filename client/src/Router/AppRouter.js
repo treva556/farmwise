@@ -17,12 +17,12 @@ import TermsandCond from '../Seller/T&C';
 
 import Shops from '../Admin/Shops';
 import Pendingshops from '../Admin/Pendingshops';
-import Addcategory from '../Admin/addcategory';
 import Allusers from '../Admin/Userspage';
 import UserDashboard from '../Seller/Shop';
 import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
 import Groups from '../pages/Groups';
+import AddProduct from '../Seller/Addproduct';
 // import { formToJSON } from 'axios';
 
 function AppRouter() {
@@ -47,11 +47,11 @@ function AppRouter() {
         <Route path="/form" element={<Form/>} />
         <Route path="/create" element={<createProduct/>} />
         <Route path="/terms" element={<TermsandCond/>} />
-
+ 
+        <Route path="/addproduct" element={<AddProduct/>} />
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
          <Route path="/admin/shops" element={<Shops/>} /> 
-         <Route path="/admin/add" element={<Addcategory/>} /> 
 
 
         {/* Subcategory and Product routes */}
