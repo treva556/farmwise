@@ -206,6 +206,14 @@ const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
           ))}
         </select>
         <input
+        type="number"
+        name="productLoc"
+        placeholder="Price"
+        value={productData.price}  // Change productData.productData.location to productData.location
+        onChange={handleInputChange}
+        required
+      />
+        <input
           type="file"
           name="images"
           accept="image/*"
@@ -230,4 +238,9 @@ export default AddProduct;
 
 
 
-//http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/organic-fertilizers/products
+//http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/npk/products/1
+
+
+
+
+
