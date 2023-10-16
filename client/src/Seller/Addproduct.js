@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 
 const AddProduct = () => {
@@ -22,29 +24,53 @@ const AddProduct = () => {
     setProductData({ ...productData, images: files });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Handle form submission logic here
-    // Send productData to the backend API, including images
+    try {
+      const formData = new FormData();
+      formData.append("productName", productData.productName);
+      formData.append("category", productData.category);
+      formData.append("subcategory", productData.subcategory);
+      formData.append("group", productData.group);
+      formData.append("description", productData.description);
+      formData.append("price", productData.price);
+      formData.append("location", productData.location);
 
-    // Reset form fields after submission if needed
-    setProductData({
-      productName: "",
-      category: "",
-      subcategory: "",
-      group: "",
-      description: "",
-      price: "",
-      location: "",
-      images: [],
-    });
+      // Append each image file to the formData object
+      for (let i = 0; i < productData.images.length; i++) {
+        formData.append("images", productData.images[i]);
+      }
+
+      const response = await fetch("http://localhost:3000/products", {
+        method: "POST",
+        headers: {
+          // Include your authorization token if needed
+          // "Authorization": `Bearer ${YOUR_AUTH_TOKEN}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Server Response:", data); // Log the entire response to inspect the structure
+
+        // Handle success logic here (redirect, show success message, etc.)
+      } else {
+        console.error("Add Product error:", response.status);
+        // Handle error (show error message, etc.)
+      }
+    } catch (error) {
+      console.error("Add Product error:", error);
+      // Handle error (show error message, etc.)
+    }
   };
 
   return (
     <div className="add-product-form">
       <h2>Add Product</h2>
       <form onSubmit={handleSubmit}>
+        {/* Add other input fields for category, subcategory, group, etc. */}
         <input
           type="text"
           name="productName"
@@ -93,3 +119,6 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
+
+//http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/organic-fertilizers/products

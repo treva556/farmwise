@@ -1,6 +1,9 @@
 
 
 
+# heres how it is
+
+
 class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :group_id }
 
@@ -15,6 +18,5 @@ class Product < ApplicationRecord
 end
 
 
-i think this image is the problem can creating directly from frontend help
 
 
