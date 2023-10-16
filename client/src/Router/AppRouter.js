@@ -45,7 +45,7 @@ function AppRouter() {
         <Route path="/about" element={<About/>} />
         
         <Route path="/form" element={<Form/>} />
-        <Route path="/create" element={<createProduct/>} />
+        {/* <Route path="/create" element={<createProduct/>} /> */}
         <Route path="/terms" element={<TermsandCond/>} />
  
         <Route path="/addproduct" element={<AddProduct/>} />

@@ -1,5 +1,6 @@
 
 
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,40 +22,47 @@ const AddProduct = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [groups, setGroups] = useState([]);
 
-  useEffect(() => {
     // Fetch categories and populate the initial category dropdown
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/categories");
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  const fetchSubcategories = async (selectedCategory) => {
+// Fetch categories
+useEffect(() => {
+  const fetchCategories = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories`);
+      const response = await fetch("http://localhost:3000/categories.json");
       const data = await response.json();
-      setSubcategories(data);
+      setCategories(data);
     } catch (error) {
-      console.error("Error fetching subcategories:", error);
+      console.error("Error fetching categories:", error);
     }
   };
 
-  const fetchGroups = async (selectedCategory, selectedSubcategory) => {
-    try {
-      const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories/${selectedSubcategory}/groups`);
-      const data = await response.json();
-      setGroups(data);
-    } catch (error) {
-      console.error("Error fetching groups:", error);
+  fetchCategories(); // Call fetchCategories inside useEffect to trigger the fetch when the component mounts
+}, []); // Empty dependency array ensures that the effect runs only once after the initial render
+
+const fetchSubcategories = async (selectedSlug) => {
+  try {
+    const response = await fetch(`http://localhost:3000/categories/${selectedSlug}/subcategories.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+    const data = await response.json();
+    setSubcategories(data); // Update subcategories state with fetched data
+  } catch (error) {
+    console.error("Error fetching subcategories:", error);
+  }
+};
+// Fetch groups
+const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
+  try {
+    const response = await fetch(`http://localhost:3000/categories/${selectedCategorySlug}/subcategories/${selectedSubcategorySlug}/groups.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    setGroups(data); // Assuming data is an array of groups with slug property
+  } catch (error) {
+    console.error("Error fetching groups:", error);
+  }
+};
 ////////////////////////////////////////////////////////////
 
   // Event handlers for dropdown changes
@@ -75,7 +83,6 @@ const AddProduct = () => {
     setProductData({ ...productData, group: selectedGroup });
   };
   
-
 
 
   const handleInputChange = (e) => {
@@ -110,7 +117,7 @@ const AddProduct = () => {
         formData.append("images", productData.images[i]);
       }
 
-      const response = await fetch("http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/organic-fertilizers/products ", {
+      const response = await fetch(`http://localhost:3000/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
         method: "POST",
         headers: {
           // Include your authorization token if needed
@@ -150,14 +157,14 @@ const AddProduct = () => {
           onChange={handleInputChange}
           required
         />
-        <input
-          type="text"
-          name="productLoc"
-          placeholder="Product location"
-          value={productData.productData.location}
-          onChange={handleInputChange}
-          required
-        />
+     <input
+        type="text"
+        name="productLoc"
+        placeholder="Product location"
+        value={productData.location}  // Change productData.productData.location to productData.location
+        onChange={handleInputChange}
+        required
+      />
         {/* Add dropdowns for category, subcategory, and group */}
         <select
           name="category"
@@ -167,7 +174,7 @@ const AddProduct = () => {
         >
           <option value="">Select Category</option>
           {categories.map((category) => (
-            <option key={category.id} value={category.id}>
+            <option key={category.slug} value={category.slug}>
               {category.name}
             </option>
           ))}
@@ -180,24 +187,24 @@ const AddProduct = () => {
         >
           <option value="">Select Subcategory</option>
           {subcategories.map((subcategory) => (
-            <option key={subcategory.id} value={subcategory.id}>
+            <option key={subcategory.slug} value={subcategory.slug}>
               {subcategory.name}
             </option>
           ))}
         </select>
         <select
-  name="group"
-  value={productData.group}
-  onChange={handleGroupChange} // Use handleGroupChange for the group dropdown
-  required
->
-  <option value="">Select Group</option>
-  {groups.map((group) => (
-    <option key={group.id} value={group.id}>
-      {group.name}
-    </option>
-  ))}
-</select>
+          name="group"
+          value={productData.group}
+          onChange={handleGroupChange}
+          required
+        >
+          <option value="">Select Group</option>
+          {groups.map((group) => (
+            <option key={group.slug} value={group.slug}>
+              {group.name}
+            </option>
+          ))}
+        </select>
         <input
           type="file"
           name="images"

@@ -1,6 +1,9 @@
 
 
 
+
+
+
 import React from "react";
 import Userproducts from "./User-products";
 import { Link } from "react-router-dom";
@@ -24,7 +27,7 @@ const Dashboard = () => {
         <div className=" bg-green-800">
           <h1>Welcome {name}</h1>
           <p className=" text-yellow-200">Email: {email}</p>
-          <Link to="/add-product">
+          <Link to="/addproduct">
             <button className="bg-white rounded-sm mb-2">Add Product</button>
           </Link>
           {/* Render user-specific content and actions */}
