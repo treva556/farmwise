@@ -12,7 +12,6 @@
 
 
 
-
 ActiveRecord::Schema[7.0].define(version: 2023_10_10_120053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,3 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_120053) do
   add_foreign_key "products", "users"
   add_foreign_key "subcategories", "categories"
 end
+
+
+

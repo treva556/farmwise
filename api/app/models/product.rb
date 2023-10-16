@@ -1,3 +1,6 @@
+
+
+
 class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :group_id }
 
@@ -10,3 +13,8 @@ class Product < ApplicationRecord
   # belongs_to :category
   belongs_to :group
 end
+
+
+i think this image is the problem can creating directly from frontend help
+
+
