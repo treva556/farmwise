@@ -2,6 +2,11 @@
 
 
 Rails.application.routes.draw do
+
+  get '/authenticity_token', to: 'products#authenticity_token'
+  match '*path', to: 'application#options', via: [:options]
+
+
   resources :users, only: [:index, :show, :update, :destroy]
   post '/register', to: 'users#register'
   post '/login', to: 'users#login'

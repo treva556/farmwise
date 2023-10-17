@@ -1,8 +1,4 @@
 
-
-
-
-
 require_relative "boot"
 
 require "rails/all"
@@ -28,9 +24,10 @@ module Api
         origins 'http://localhost:3001' # Replace with the actual domain of your React app
         resource '/register', headers: :any, methods: [:post]
         resource '/login', headers: :any, methods: [:post]
-
+        resource '*',headers: :any,methods: [:get, :post, :put, :patch, :delete, :options]
         # Add other routes as needed
       end
       end
   end
 end
+

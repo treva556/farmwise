@@ -1,7 +1,11 @@
 
 
+#heres group controller
+
 
 class GroupsController < ApplicationController
+  before_action :set_subcategory
+
     before_action :set_group, only: [:show, :update, :destroy]
   
     # GET /groups
@@ -48,15 +52,21 @@ class GroupsController < ApplicationController
     end
   
     private
-  
-    def set_group
+
+    def set_subcategory
       @subcategory = Subcategory.find_by(slug: params[:subcategory_slug])
       render_subcategory_not_found unless @subcategory
+    end
   
-      @group = @subcategory.groups.find_by(slug: params[:group_slug])
+    def set_group
+      @group = Group.find_by(slug: params[:group_group_slug])
       render_group_not_found unless @group
     end
   
+    def render_group_not_found
+      render json: { error: 'Group not found' }, status: :not_found
+    end
+
     def group_params
       params.require(:group).permit(:name, :slug, :subcategory_id)
     end

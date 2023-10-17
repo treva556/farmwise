@@ -1,25 +1,24 @@
 
 
-
-
 class ProductsController < ApplicationController
-  before_action :set_category
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create] # Add other actions if needed
+
+  before_action :set_group, only: [:create]
+  before_action :set_category, only: [:index, :show]
 
   def index
-    if params[:subcategory_slug].present?
-      subcategory = @category.subcategories.find_by(slug: params[:subcategory_slug])
-      @products = subcategory&.products || []
-    elsif params[:category_slug].present?
-      category = Category.find_by(slug: params[:category_slug])
-      @products = category&.products || []
-    else
-      @products = Product.all
-    end
+    @products = if params[:subcategory_slug].present?
+                  subcategory = @category.subcategories.find_by(slug: params[:subcategory_slug])
+                  subcategory&.products || []
+                elsif params[:category_slug].present?
+                  category = Category.find_by(slug: params[:category_slug])
+                  category&.products || []
+                else
+                  Product.all
+                end
   
     render json: @products
   end
-
 
   def create
     @product = @group.products.new(product_params)
@@ -27,16 +26,18 @@ class ProductsController < ApplicationController
     if @product.save
       render json: @product, status: :created
     else
-      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @product.errors.full_messages, authenticity_token: form_authenticity_token }, status: :unprocessable_entity
     end
+  end
+
+  def authenticity_token
+    render json: { authenticity_token: form_authenticity_token }
   end
 
   def show
     @product = @group.products.find_by(slug: params[:slug])
     render_product_not_found unless @product
   end
-
-  # Implement other controller actions as needed (create, update, destroy)
 
   private
 
@@ -49,7 +50,7 @@ class ProductsController < ApplicationController
     else
       @category = Category.find_by(slug: 'default') # Replace with your default category
     end
-  
+
     render json: { error: 'Category not found' }, status: :not_found unless @category
   end
   
@@ -62,6 +63,3 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :price, :description, :location, :user_id, :subcategory_id, images: [])
   end
 end
-
-
-

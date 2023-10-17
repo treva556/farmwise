@@ -1,15 +1,12 @@
 
 
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const AddProduct = () => {
-  const navigate = useNavigate(); // Call useNavigate hook here to get the navigate function
-
+  const navigate = useNavigate();
   const [productData, setProductData] = useState({
-    productName: "",
+    name: "",
     category: "",
     subcategory: "",
     group: "",
@@ -21,51 +18,56 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [userEmail, setUserEmail] = useState(localStorage.getItem("user") || null);
 
-    // Fetch categories and populate the initial category dropdown
-// Fetch categories
-useEffect(() => {
-  const fetchCategories = async () => {
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseCategories = await fetch("http://localhost:3000/categories.json");
+        const dataCategories = await responseCategories.json();
+        setCategories(dataCategories);
+
+        // You can fetch subcategories and groups here similarly...
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+
+  //Fetch categories, subcategories, and groups whenever authenticityToken changes
+
+  const fetchSubcategories = async (selectedSlug) => {
     try {
-      const response = await fetch("http://localhost:3000/categories.json");
+      const response = await fetch(`http://localhost:3000/categories/${selectedSlug}/subcategories.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
-      setCategories(data);
+      setSubcategories(data);
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error("Error fetching subcategories:", error);
     }
   };
 
-  fetchCategories(); // Call fetchCategories inside useEffect to trigger the fetch when the component mounts
-}, []); // Empty dependency array ensures that the effect runs only once after the initial render
-
-const fetchSubcategories = async (selectedSlug) => {
-  try {
-    const response = await fetch(`http://localhost:3000/categories/${selectedSlug}/subcategories.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
+    try {
+      const response = await fetch(`http://localhost:3000/categories/${selectedCategorySlug}/subcategories/${selectedSubcategorySlug}/groups.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setGroups(data);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
     }
-    const data = await response.json();
-    setSubcategories(data); // Update subcategories state with fetched data
-  } catch (error) {
-    console.error("Error fetching subcategories:", error);
-  }
-};
-// Fetch groups
-const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
-  try {
-    const response = await fetch(`http://localhost:3000/categories/${selectedCategorySlug}/subcategories/${selectedSubcategorySlug}/groups.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    setGroups(data); // Assuming data is an array of groups with slug property
-  } catch (error) {
-    console.error("Error fetching groups:", error);
-  }
-};
-////////////////////////////////////////////////////////////
+  };
 
-  // Event handlers for dropdown changes
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     setProductData({ ...productData, category: selectedCategory, subcategory: "", group: "" });
@@ -82,8 +84,6 @@ const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
     const selectedGroup = e.target.value;
     setProductData({ ...productData, group: selectedGroup });
   };
-  
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,57 +92,54 @@ const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
 
   const handleImageChange = (e) => {
     const files = e.target.files;
-    const imageFiles = [];
-    for (let i = 0; i < files.length; i++) {
-      imageFiles.push(files[i]);
-    }
+    const imageFiles = Array.from(files); // Convert FileList to Array
     setProductData({ ...productData, images: imageFiles });
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+    
       const formData = new FormData();
-      formData.append("productName", productData.productName);
-      formData.append("category", productData.category);
-      formData.append("subcategory", productData.subcategory);
-      formData.append("group", productData.group);
+      formData.append("name", productData.name);
+      formData.append("price", parseInt(productData.price)); // Assuming price is in cents, convert it to an integer if necessary
       formData.append("description", productData.description);
-      formData.append("price", productData.price);
       formData.append("location", productData.location);
-
-      // Append each image file to the formData object
+      formData.append("user_email", userEmail); // Replace user_id with the actual user ID from your application state or context
+      formData.append("category_id", productData.category);
+      formData.append("group_id", productData.group);
+  
       for (let i = 0; i < productData.images.length; i++) {
         formData.append("images", productData.images[i]);
       }
+  
+      
+
+    console.log("Form Data:", formData);
 
       const response = await fetch(`http://localhost:3000/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
         method: "POST",
-        headers: {
-          // Include your authorization token if needed
-          // "Authorization": `Bearer ${YOUR_AUTH_TOKEN}`,
-        },
         body: formData,
       });
 
+      console.log("Response Status:", response.status);
+
+
       if (response.ok) {
         const data = await response.json();
-        console.log("Server Response:", data); // Log the entire response to inspect the structure
-
-//// navigate
-        navigate("/sellershop"); // Redirect to the Dashboard after adding a product
-
-        // Handle success logic here (redirect, show success message, etc.)
+        console.log("Server Response:", data);
+        navigate("/sellershop");
       } else {
         console.error("Add Product error:", response.status);
-        // Handle error (show error message, etc.)
       }
     } catch (error) {
       console.error("Add Product error:", error);
-      // Handle error (show error message, etc.)
     }
   };
+
 
   return (
     <div className="add-product-form">
@@ -151,17 +148,25 @@ const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
         {/* Add other input fields for category, subcategory, group, etc. */}
         <input
           type="text"
-          name="productName"
+          name="name"
           placeholder="Product Name"
-          value={productData.productName}
+          value={productData.name}
           onChange={handleInputChange}
           required
         />
      <input
         type="text"
-        name="productLoc"
+        name="location"
         placeholder="Product location"
         value={productData.location}  // Change productData.productData.location to productData.location
+        onChange={handleInputChange}
+        required
+      />
+        <input
+        type="text"
+        name="description"
+        placeholder="desc"
+        value={productData.description}  // Change productData.productData.location to productData.location
         onChange={handleInputChange}
         required
       />
@@ -207,21 +212,18 @@ const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
         </select>
         <input
         type="number"
-        name="productLoc"
+        name="price"
         placeholder="Price"
         value={productData.price}  // Change productData.productData.location to productData.location
         onChange={handleInputChange}
         required
       />
-        <input
-          type="file"
-          name="images"
-          accept="image/*"
-          onChange={handleImageChange}  // Make sure you pass the function reference here
-          multiple
-          required
-        />
+      
         {/* Rest of your form */}
+      
+        {/* Input fields and dropdowns */}
+        {/* Add other input fields and dropdowns similarly */}
+        <input type="file" name="images" accept="image/*" onChange={handleImageChange} multiple required />
         <button type="submit">Add Product</button>
       </form>
     </div>
@@ -236,11 +238,5 @@ export default AddProduct;
 
 
 
-
-
 //http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/npk/products/1
-
-
-
-
 
