@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     if user && user.authenticate(params[:password])
       token = user.generate_jwt
-      render json: { token: token }
+      render json: { token: token, user: user }  # Include user data in the response
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
