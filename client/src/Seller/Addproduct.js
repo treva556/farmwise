@@ -1,5 +1,8 @@
 
 
+// Add product
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +21,7 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [userEmail, setUserEmail] = useState(localStorage.getItem("user") || null);
+  // const [userEmail, setUserEmail] = useState(localStorage.getItem("user") || null);
 
 
 
@@ -100,46 +103,48 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-    
+  
+    if (productData.images.length === 0) {
+      console.error("No images selected");
+      return; // Stop the submission if no images are selected
+    }
+  
+    if (productData.category !== "" && productData.subcategory !== "" && productData.group !== "") {
       const formData = new FormData();
-      formData.append("name", productData.name);
-      formData.append("price", parseInt(productData.price)); // Assuming price is in cents, convert it to an integer if necessary
-      formData.append("description", productData.description);
-      formData.append("location", productData.location);
-      formData.append("user_email", userEmail); // Replace user_id with the actual user ID from your application state or context
-      formData.append("category_id", productData.category);
-      formData.append("group_id", productData.group);
-  
-      for (let i = 0; i < productData.images.length; i++) {
-        formData.append("images", productData.images[i]);
-      }
-  
+      formData.append("product[name]", productData.name);
+      formData.append("product[price]", parseInt(productData.price));
+      formData.append("product[description]", productData.description);
+      formData.append("product[location]", productData.location);
+      // formData.append("product[user_email]", userEmail);
+      formData.append("product[category_id]", productData.category);
+      formData.append("product[group_id]", productData.group);
       
-
-    console.log("Form Data:", formData);
-
-      const response = await fetch(`http://localhost:3000/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
-        method: "POST",
-        body: formData,
-      });
-
-      console.log("Response Status:", response.status);
-
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Server Response:", data);
-        navigate("/sellershop");
-      } else {
-        console.error("Add Product error:", response.status);
+      for (let i = 0; i < productData.images.length; i++) {
+        formData.append("product[images][]", productData.images[i]);
       }
-    } catch (error) {
-      console.error("Add Product error:", error);
+  
+      try {
+        const response = await fetch(`http://localhost:3000/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
+          method: "POST",
+          body: formData,
+        });
+  
+        console.log("Response Status:", response.status);
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Server Response:", data);
+          navigate("/sellershop");
+        } else {
+          console.error("Add Product error:", response.status);
+        }
+      } catch (error) {
+        console.error("Add Product error:", error);
+      }
+    } else {
+      console.error("Invalid category, subcategory, or group selection");
     }
   };
-
 
   return (
     <div className="add-product-form">
@@ -234,9 +239,9 @@ export default AddProduct;
 
 
 
-
-
+////hh
 
 
 //http://localhost:3000/categories/farm-produce/subcategories/fertilizers/groups/npk/products/1
 
+///

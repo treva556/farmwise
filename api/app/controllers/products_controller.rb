@@ -1,5 +1,8 @@
 
 
+# product controller
+
+
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create] # Add other actions if needed
 
@@ -21,7 +24,12 @@ class ProductsController < ApplicationController
   end
 
   def create
+    puts "Product Params: #{product_params}"
+
     @product = @group.products.new(product_params)
+    @product.category = Category.find_by(slug: params[:category_slug])
+    @product.subcategory = Subcategory.find_by(slug: params[:subcategory_slug])
+    @product.group = Group.find_by(slug: params[:group_group_slug])
 
     if @product.save
       render json: @product, status: :created
@@ -55,11 +63,19 @@ class ProductsController < ApplicationController
   end
   
   def set_group
-    @group = Group.find_by(slug: params[:group_slug])
-    render json: { error: 'Group not found' }, status: :not_found unless @group
+    puts "Group Group Slug: #{params[:group_group_slug]}"
+    @group = Group.find_by(slug: params[:group_group_slug])
+    if @group.nil?
+      puts "Group not found!"
+      render_group_not_found
+    end
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :description, :location, :user_id, :subcategory_id, images: [])
+    params.require(:product).permit(:name, :price, :description, :location, :category_id, :subcategory_id, :group_id, images: [])
+
+
   end
 end
+
+

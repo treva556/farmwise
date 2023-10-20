@@ -31,5 +31,6 @@ class CategoriesController < ApplicationController
   end
 end
 
-
+# def
 #iii
+#3ee
