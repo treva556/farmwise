@@ -1,10 +1,10 @@
 
-
 // Add product
 
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import LoginShop from "./Login"
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -21,9 +21,7 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [groups, setGroups] = useState([]);
-  // const [userEmail, setUserEmail] = useState(localStorage.getItem("user") || null);
-
-
+  const userId = JSON.parse(localStorage.getItem("user")).id;
 
 
   useEffect(() => {
@@ -115,9 +113,11 @@ const AddProduct = () => {
       formData.append("product[price]", parseInt(productData.price));
       formData.append("product[description]", productData.description);
       formData.append("product[location]", productData.location);
-      // formData.append("product[user_email]", userEmail);
       formData.append("product[category_id]", productData.category);
+      formData.append("product[subcategory_id]", productData.subcategory);
       formData.append("product[group_id]", productData.group);
+      formData.append("product[user_id]", userId);
+
       
       for (let i = 0; i < productData.images.length; i++) {
         formData.append("product[images][]", productData.images[i]);

@@ -1,6 +1,6 @@
 
 
-# product controller
+# below is product controller
 
 
 class ProductsController < ApplicationController
@@ -34,6 +34,7 @@ class ProductsController < ApplicationController
     if @product.save
       render json: @product, status: :created
     else
+      puts "Errors: #{@product.errors}"
       render json: { errors: @product.errors.full_messages, authenticity_token: form_authenticity_token }, status: :unprocessable_entity
     end
   end
@@ -72,8 +73,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :description, :location, :category_id, :subcategory_id, :group_id, images: [])
-
+    params.require(:product).permit(:name, :price, :description, :location, :category_id, :subcategory_id, :group_id, :user_id, images: [])
 
   end
 end

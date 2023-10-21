@@ -13,7 +13,7 @@ class Product < ApplicationRecord
 
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :description, presence: true
-  validates :image, presence: true
+  validates :images, presence: true
   validates :location, presence: true
 
 
