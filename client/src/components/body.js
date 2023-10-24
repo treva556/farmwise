@@ -1,6 +1,3 @@
-
-// bodyy
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -31,8 +28,8 @@ function Bodyy() {
     }
   };
 
-  const handleDelete = (id) => {
-    fetch(`http://localhost:3000/categories/${id}`, {
+  const handleDelete = (slug) => {
+    fetch(`http://localhost:3000/categories/${slug}`, { // Updated endpoint with slug
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +39,7 @@ function Bodyy() {
       .then(data => {
         console.log('Category deleted:', data.message);
         // Optionally, update the state or re-fetch categories list after deletion
-        setCategories(categories.filter(category => category.id !== id));
+        setCategories(categories.filter(category => category.slug !== slug)); // Updated filter condition
       })
       .catch(error => {
         console.error('Error deleting category:', error);
@@ -60,7 +57,7 @@ function Bodyy() {
                 <img src={getImageUrl(category.image)} alt={category.name} className="mx-auto h-32 w-32 object-contain mb-4" />
                 <h2 className="font-bold text-xl">{category.name}</h2>
               </Link>
-              <button onClick={() => handleDelete(category.id)}>Delete</button>
+              <button onClick={() => handleDelete(category.slug)}>Delete</button> {/* Pass slug instead of id */}
             </div>
           ))}
         </div>
