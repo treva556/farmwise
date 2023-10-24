@@ -31,6 +31,12 @@ class ProductsController < ApplicationController
     @product.subcategory = Subcategory.find_by(slug: params[:subcategory_slug])
     @product.group = Group.find_by(slug: params[:group_group_slug])
 
+    if params[:product][:images].present?
+      params[:product][:images].each do |image|
+        @product.images.attach(image)
+      end
+    end
+
     if @product.save
       render json: @product, status: :created
     else

@@ -27,6 +27,7 @@ import LoginShop from '../Seller/Login';
 import Groups from '../pages/Groups';
 import AddProduct from '../Seller/Addproduct';
 // import { formToJSON } from 'axios';
+import Category from '../Admin/Categories';
 
 function AppRouter() {
   // const { user, setUser } = useAuth(); // Use the custom hook to get user data
@@ -44,7 +45,12 @@ function AppRouter() {
 
         <Route path="/login" element={<LoginShop />} /> 
         <Route path="/search" element={<Searchpage />} />
+
+
         <Route path="/admin" element={<Adminprofile />} />
+        <Route path="/admin/users" element={<Allusers/>} /> 
+
+
         <Route path="/about" element={<About/>} />
         
         <Route path="/form" element={<Form/>} />
@@ -55,7 +61,7 @@ function AppRouter() {
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
          <Route path="/admin/shops" element={<Shops/>} /> 
-
+<Route path="/admin/category" element={<Category/>} />
 
         {/* Subcategory and Product routes */}
          <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
@@ -63,7 +69,6 @@ function AppRouter() {
 
 
         {/* <Route path="/categories/:categoryId" element={<CategoryPage />} /> */}
-        <Route path="/admin/users" element={<Allusers/>} /> 
 
 
       </Routes>

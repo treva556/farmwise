@@ -1,15 +1,15 @@
 
-
-
 Rails.application.routes.draw do
 
   get '/authenticity_token', to: 'products#authenticity_token'
   match '*path', to: 'application#options', via: [:options]
+  delete '/categories/:slug', to: 'categories#destroy'
 
 
   resources :users, only: [:index, :show, :update, :destroy]
   post '/register', to: 'users#register'
   post '/login', to: 'users#login'
+
 
   resources :categories, param: :slug, only: [:index, :show, :create, :update, :destroy] do
     resources :subcategories, param: :slug, only: [:index, :show, :create, :update, :destroy] do

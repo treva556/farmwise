@@ -1,9 +1,8 @@
 
-
+// bodyy
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import pic1 from "../images/pic1.png";
 
 function Bodyy() {
   const [categories, setCategories] = useState([]);
@@ -12,6 +11,7 @@ function Bodyy() {
     fetch("http://localhost:3000/categories.json")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setCategories(data);
       })
       .catch((error) => {
@@ -19,26 +19,49 @@ function Bodyy() {
       });
   }, []);
 
+  const getImageUrl = (imageData) => {
+    if (imageData && imageData.url) {
+      return `http://localhost:3000${imageData.url}`;
+    } else if (typeof imageData === 'string') {
+      return imageData;
+    } else if (imageData && imageData.image && imageData.image.url) {
+      return `http://localhost:3000${imageData.image.url}`;
+    } else {
+      return '/path/to/default/image.png';
+    }
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3000/categories/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Category deleted:', data.message);
+        // Optionally, update the state or re-fetch categories list after deletion
+        setCategories(categories.filter(category => category.id !== id));
+      })
+      .catch(error => {
+        console.error('Error deleting category:', error);
+      });
+  };
+
   return (
     <>
-      {/* Other components */}
-      
       <div className="mt-8 bg-yellow-200">
         <h1 className="text-xl underline">Categories</h1>
         <div className="flex flex-wrap justify-around mt-8">
           {categories.map((category) => (
-            <Link
-              to={`/categories/${category.slug}/subcategories`}
-              key={category.id}
-              className="w-64 h-80 p-4 m-2 bg-yellow-200 rounded-lg shadow-md text-center hover:border-green-500 transition duration-300"
-            >
-              <img
-                src={pic1}
-                alt={category.name}
-                className="mx-auto h-32 w-32 object-contain mb-4"
-              />
-              <h2 className="font-bold text-xl">{category.name}</h2>
-            </Link>
+            <div key={category.id} className="w-64 h-80 p-4 m-2 bg-yellow-200 rounded-lg shadow-md text-center hover:border-green-500 transition duration-300">
+              <Link to={`/categories/${category.slug}/subcategories`} className="block mb-4">
+                <img src={getImageUrl(category.image)} alt={category.name} className="mx-auto h-32 w-32 object-contain mb-4" />
+                <h2 className="font-bold text-xl">{category.name}</h2>
+              </Link>
+              <button onClick={() => handleDelete(category.id)}>Delete</button>
+            </div>
           ))}
         </div>
       </div>
@@ -47,6 +70,3 @@ function Bodyy() {
 }
 
 export default Bodyy;
-
-
-////////
