@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
-function Category() {
+const Category = () => {
   const [categoryData, setCategoryData] = useState({
     name: "",
     slug: "",
@@ -19,7 +19,7 @@ function Category() {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0]; // Get the first file from the input
-    setCategoryData({ ...categoryData, image: file });
+    setCategoryData({ ...categoryData, image: file }); // Store the entire file object in the state
   };
 
   const handleSubmit = (event) => {
@@ -28,7 +28,7 @@ function Category() {
     const formData = new FormData();
     formData.append("category[name]", categoryData.name);
     formData.append("category[slug]", categoryData.slug);
-    formData.append("category[image]", categoryData.image);
+    formData.append("category[image]", categoryData.image); // Append the entire file object
 
     fetch('http://localhost:3000/categories', {
       method: 'POST',
@@ -76,6 +76,7 @@ function Category() {
       </form>
     </div>
   );
-}
+};
 
 export default Category;
+

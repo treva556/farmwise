@@ -1,3 +1,7 @@
+
+
+//body
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -17,12 +21,10 @@ function Bodyy() {
   }, []);
 
   const getImageUrl = (imageData) => {
-    if (imageData && imageData.url) {
-      return `http://localhost:3000${imageData.url}`;
-    } else if (typeof imageData === 'string') {
-      return imageData;
-    } else if (imageData && imageData.image && imageData.image.url) {
+    if (imageData && imageData.image && imageData.image.url) {
       return `http://localhost:3000${imageData.image.url}`;
+    } else if (typeof imageData === 'string' && imageData !== 'null') {
+      return `http://localhost:3000${imageData}`;
     } else {
       return '/path/to/default/image.png';
     }
@@ -67,3 +69,5 @@ function Bodyy() {
 }
 
 export default Bodyy;
+
+
