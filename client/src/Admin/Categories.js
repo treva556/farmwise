@@ -5,6 +5,7 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
+
 const Category = () => {
   const [categoryData, setCategoryData] = useState({
     name: "",
@@ -32,7 +33,10 @@ const Category = () => {
 
     fetch('http://localhost:3000/categories', {
       method: 'POST',
-      body: formData, // Use FormData to handle file upload
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data', // Set the Content-Type header
+      },
     })
       .then(response => response.json())
       .then(data => {
@@ -41,7 +45,6 @@ const Category = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-  };
 
   return (
     <div className="flex">
