@@ -18,29 +18,22 @@ class CategoriesController < ApplicationController
 
  
   def create
-    puts "Received image data: #{params[:category][:image]}"
-
     category = Category.new(category_params)
     
     if category_params[:image].present?
-      uploaded_io = category_params[:image]
-      filename = File.basename(uploaded_io.original_filename)
-      category.image = "/uploads/category/image/#{category.id}/#{filename}"
-      # Save the file to the appropriate directory
-      File.open(Rails.root.join('public', 'uploads', 'category', 'image', category.id.to_s, filename), 'wb') do |file|
-        file.write(uploaded_io.read)
+      category.image.attach(category_params[:image])  # Attach the image directly
+
+      # You don't need to manually save the file to the public directory
+
+      if category.save
+        category_data = category.attributes
+        category_data['image'] = rails_blob_path(category.image, only_path: true)
+        render json: category_data, status: :created
+      else
+        render json: { errors: category.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      category.image = '/images/fallback/default.png'
-    end
-  
-    if category.save
-      # Send the complete image URL in the response
-      category_data = category.attributes
-      category_data['image'] = category.image
-      render json: category_data, status: :created
-    else
-      render json: { errors: category.errors.full_messages }, status: :unprocessable_entity
+      # Handle case when no image is provided
     end
   end
 

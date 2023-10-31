@@ -1,4 +1,5 @@
 
+
 // admin category
 
 
@@ -25,26 +26,36 @@ const Category = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     const formData = new FormData();
     formData.append("category[name]", categoryData.name);
     formData.append("category[slug]", categoryData.slug);
-    formData.append("category[image]", categoryData.image); // Append the entire file object
-
+    formData.append("image", categoryData.image);
+    
     fetch('http://localhost:3000/categories', {
       method: 'POST',
       body: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data', // Set the Content-Type header
-      },
+      // Do not set Content-Type header, let the browser set it automatically
     })
-      .then(response => response.json())
-      .then(data => {
+    .then(response => {
+      if (response.status === 204) {
+        // No Content response, handle it appropriately
+        console.log('Success: No Content');
+      } else if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .then(data => {
+      if (data) {
         console.log('Success:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
 
   return (
     <div className="flex">
