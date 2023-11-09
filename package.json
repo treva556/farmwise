@@ -1,6 +1,6 @@
 {
   "name": "farmwise-pract",
-  "homepage": "https://farmwise.co.ke",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
