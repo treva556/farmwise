@@ -1,7 +1,6 @@
 
 // admin category
 
-
 import Sidebar from "./Sidebar";
 
 import React, { useState } from "react";
@@ -29,10 +28,11 @@ const Category = () => {
     const formData = new FormData();
     formData.append("category[name]", categoryData.name);
     formData.append("category[slug]", categoryData.slug);
-    
+    formData.append("category[image]", categoryData.image);
+
     // Append image without encoding
-    formData.append("image", categoryData.image);
-    
+    console.log(formData);
+
     try {
       const response = await fetch("http://localhost:3000/categories", {
         method: 'POST',

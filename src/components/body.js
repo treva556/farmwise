@@ -1,5 +1,4 @@
 
-
 //body
 
 import React, { useState, useEffect } from "react";
@@ -21,17 +20,24 @@ function Bodyy() {
   }, []);
 
   const getImageUrl = (imageData) => {
+    const defaultImageUrl = '/path/to/default/image.png';
+  
     if (imageData && imageData.image && imageData.image.url) {
-      return `http://localhost:3000${imageData.image.url}`;
+      const imageUrl = `http://localhost:3000${imageData.image.url}`;
+      console.log('Image URL:', imageUrl);
+      return imageUrl;
     } else if (typeof imageData === 'string' && imageData !== 'null') {
-      return `http://localhost:3000${imageData}`;
+      const imageUrl = `http://localhost:3000${imageData}`;
+      console.log('Image URL:', imageUrl);
+      return imageUrl;
     } else {
-      return '/path/to/default/image.png';
+      console.log('Using default image URL:', defaultImageUrl);
+      return defaultImageUrl;
     }
   };
 
   const handleDelete = (slug) => {
-    fetch(`http://localhost:3000/categories/${slug}`, { // Updated endpoint with slug
+    fetch(`http://localhost:3000/categories/${slug}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -40,13 +46,13 @@ function Bodyy() {
       .then(response => response.json())
       .then(data => {
         console.log('Category deleted:', data.message);
-        // Optionally, update the state or re-fetch categories list after deletion
-        setCategories(categories.filter(category => category.slug !== slug)); // Updated filter condition
+        setCategories(categories.filter(category => category.slug !== slug));
       })
       .catch(error => {
         console.error('Error deleting category:', error);
       });
   };
+   
 
   return (
     <>
