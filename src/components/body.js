@@ -59,7 +59,7 @@ function Bodyy() {
                 <img src={getImageUrl(category.image)} alt={category.name} className="mx-auto h-32 w-32 object-contain mb-4" />
                 <h2 className="font-bold text-xl">{category.name}</h2>
               </Link>
-              <button onClick={() => handleDelete(category.slug)}>Delete</button> {/* Pass slug instead of id */}
+              {/* <button onClick={() => handleDelete(category.slug)}>Delete</button> Pass slug instead of id */}
             </div>
           ))}
         </div>

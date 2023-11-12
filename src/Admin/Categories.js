@@ -1,60 +1,55 @@
 
-
 // admin category
 
 
-import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
+import React, { useState } from "react";
 
 const Category = () => {
   const [categoryData, setCategoryData] = useState({
     name: "",
     slug: "",
-    image: null // Use null for the image state
+    image: null,
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCategoryData({ ...categoryData, [name]: value });
+    setCategoryData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0]; // Get the first file from the input
-    setCategoryData({ ...categoryData, image: file }); // Store the entire file object in the state
+    const file = event.target.files[0];
+    setCategoryData((prevData) => ({ ...prevData, image: file }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
+  
     const formData = new FormData();
     formData.append("category[name]", categoryData.name);
     formData.append("category[slug]", categoryData.slug);
+    
+    // Append image without encoding
     formData.append("image", categoryData.image);
     
-    fetch('http://localhost:3000/categories', {
-      method: 'POST',
-      body: formData,
-      // Do not set Content-Type header, let the browser set it automatically
-    })
-    .then(response => {
-      if (response.status === 204) {
-        // No Content response, handle it appropriately
-        console.log('Success: No Content');
-      } else if (response.ok) {
-        return response.json();
+    try {
+      const response = await fetch("http://localhost:3000/categories", {
+        method: 'POST',
+        headers: {}, // or you can omit this line entirely
+        body: formData,  // Corrected line: use formData instead of body
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Success:", data);
       } else {
-        throw new Error('Network response was not ok');
+        const errorData = await response.json();
+        console.error("Validation Errors:", errorData.errors);
       }
-    })
-    .then(data => {
-      if (data) {
-        console.log('Success:', data);
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -82,7 +77,8 @@ const Category = () => {
           Image:
           <input
             type="file"
-            accept="image/*" // Allow only image files
+            accept="image/*"
+            name="image" 
             onChange={handleImageChange}
           />
         </label>
@@ -93,4 +89,7 @@ const Category = () => {
 };
 
 export default Category;
+
+
+
 
