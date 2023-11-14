@@ -6,7 +6,7 @@ function AllCategories() {
     <>
     <Sidebar/>
     <div className="flex">
-         jiuuu
+         jiuuullll
     </div>
     </>
    

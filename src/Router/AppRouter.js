@@ -34,6 +34,10 @@ import Adminprofile from '../Admin/Adminprofile';
 import Pendingshops from '../Admin/Pendingshops';
 import Allusers from '../Admin/Userspage';
 import Category from '../Admin/AddCategories';
+import AddSubcategory from '../Admin/add subcategory';
+import AddGroup from '../Admin/Add-group';
+import AllCategories from '../Admin/Category';
+
 
 
 
@@ -54,24 +58,27 @@ function AppRouter() {
 
         <Route path="/login" element={<LoginShop />} /> 
         <Route path="/search" element={<Searchpage />} />
+        <Route path="/form" element={<Form/>} />
+        <Route path="/addproduct" element={<AddProduct/>} />
 
-
+{/*admin}*/}
         <Route path="/admin" element={<Adminprofile />} />
         <Route path="/admin/shops" element={<Allusers/>} /> 
+        <Route path="/admin/pending" element={<Pendingshops/>} />
+        <Route path="/admin/addcategory" element={<Category/>} />
+        <Route path="/admin/addsub" element={<AddSubcategory/>} />
+        <Route path="/admin/addgroup" element={<AddGroup/>} />
+        <Route path="/admin/all" element={<AllCategories/>} />
+
+
+
 
 
         <Route path="/about" element={<About/>} />
-        
-        <Route path="/form" element={<Form/>} />
         {/* <Route path="/create" element={<createProduct/>} /> */}
         <Route path="/terms" element={<TermsandCond/>} />
  
-        <Route path="/addproduct" element={<AddProduct/>} />
-
-        <Route path="/admin/pending" element={<Pendingshops/>} />
-         {/* <Route path="/admin/shops" element={<Shops/>} />  */}
-        <Route path="/admin/category" element={<Category/>} />
-
+      
         {/* Subcategory and Product routes */}
          <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
          <Route path="/categories/:categorySlug/subcategories" element={<SubcategoryPage/>} /> 
