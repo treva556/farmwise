@@ -7,12 +7,13 @@ import React, { useState } from 'react';
 
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+//users routes
 import Home from '../pages/Homepage';
 import Searchpage from '../pages/Searchpage';
 import Adminprofile from '../Admin/Adminprofile';
 import Form from '../Seller/reg2';
 import About from '../components/Aboutus';
-// import Layout from '../Admin/Layout';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
@@ -24,10 +25,15 @@ import Allusers from '../Admin/Userspage';
 import UserDashboard from '../Seller/Shop';
 import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
+
+
+// admin routes
 import Groups from '../pages/Groups';
 import AddProduct from '../Seller/Addproduct';
-// import { formToJSON } from 'axios';
 import Category from '../Admin/AddCategories';
+
+
+
 
 function AppRouter() {
   // const { user, setUser } = useAuth(); // Use the custom hook to get user data

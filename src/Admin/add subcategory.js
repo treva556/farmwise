@@ -1,12 +1,16 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 
-function Layout({ children }) {
+function AddSubcategory() {
   return (
+    <>
+    <Sidebar/>
     <div className="flex">
-     
+         jiuuu
     </div>
+    </>
+   
   );
 }
 
-export default Layout;
+export default AddSubcategory;
