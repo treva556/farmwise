@@ -48,7 +48,7 @@ function AppRouter() {
 
 
         <Route path="/admin" element={<Adminprofile />} />
-        <Route path="/admin/users" element={<Allusers/>} /> 
+        <Route path="/admin/shops" element={<Allusers/>} /> 
 
 
         <Route path="/about" element={<About/>} />
@@ -61,7 +61,7 @@ function AppRouter() {
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
          <Route path="/admin/shops" element={<Shops/>} /> 
-<Route path="/admin/category" element={<Category/>} />
+        <Route path="/admin/category" element={<Category/>} />
 
         {/* Subcategory and Product routes */}
          <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
