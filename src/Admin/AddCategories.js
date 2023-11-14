@@ -34,7 +34,7 @@ const Category = () => {
     console.log(formData);
 
     try {
-      const response = await fetch("http://localhost:3000/categories", {
+      const response = await fetch("https://farmerr-dgb1.onrender.com/categories", {
         method: 'POST',
         headers: {}, // or you can omit this line entirely
         body: formData,  // Corrected line: use formData instead of body

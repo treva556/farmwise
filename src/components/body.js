@@ -8,7 +8,7 @@ function Bodyy() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/categories.json")
+    fetch("https://farmerr-dgb1.onrender.com")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -20,10 +20,10 @@ function Bodyy() {
   }, []);
 
   const getImageUrl = (category) => {
-    const defaultImageUrl = 'http://localhost:3000/path/to/default/image.png';
+    const defaultImageUrl = "https://farmerr-dgb1.onrender.com//path/to/default/image.png";
   
     if (category.image_url) {
-      const imageUrl = `http://localhost:3000${category.image_url}`;
+      const imageUrl = `https://farmerr-dgb1.onrender.com/${category.image_url}`;
       console.log('Image URL:', imageUrl); // Log the image URL
       return imageUrl;
     } else {
@@ -33,7 +33,7 @@ function Bodyy() {
   };
 
   const handleDelete = (slug) => {
-    fetch(`http://localhost:3000/categories/${slug}`, {
+    fetch(`https://farmerr-dgb1.onrender.com//${slug}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
