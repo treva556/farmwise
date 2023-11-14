@@ -27,7 +27,7 @@ import LoginShop from '../Seller/Login';
 import Groups from '../pages/Groups';
 import AddProduct from '../Seller/Addproduct';
 // import { formToJSON } from 'axios';
-import Category from '../Admin/Categories';
+import Category from '../Admin/AddCategories';
 
 function AppRouter() {
   // const { user, setUser } = useAuth(); // Use the custom hook to get user data

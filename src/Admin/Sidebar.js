@@ -12,13 +12,13 @@ function Sidebar() {
         <li>
           <Link to="/admin/shops" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white-500 hover:text-white-800">
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-white-400"><i className="bx bx-home"></i></span>
-            <span className="text-sm font-medium">Shops</span>
+            <span className="text-sm font-medium">Products</span>
           </Link>
         </li>
         <li>
           <Link to="/admin/category" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white-500 hover:text-white-800">
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-white-400"><i className="bx bx-home"></i></span>
-            <span className="text-sm font-medium">Create</span>
+            <span className="text-sm font-medium">AddCategory</span>
           </Link>
         </li>
           
@@ -34,14 +34,21 @@ function Sidebar() {
         <Link to="/admin/add" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white-500 hover:text-gray-800">
 
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-white-400"><i className="bx bx-message"></i></span>
-            <span className="text-sm font-medium">Add</span>
+            <span className="text-sm font-medium">AddSubcategory</span>
+          </Link>
+        </li>
+        <li>
+        <Link to="/admin/add" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white-500 hover:text-gray-800">
+
+            <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-white-400"><i className="bx bx-message"></i></span>
+            <span className="text-sm font-medium">AddGroup</span>
           </Link>
         </li>
         <li>
         <Link to="/admin/users" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-white-500 hover:text-gray-800">
 
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-white-400"><i className="bx bx-message"></i></span>
-            <span className="text-sm font-medium">Users</span>
+            <span className="text-sm font-medium">Shops</span>
           </Link>
         </li>
       </ul>
