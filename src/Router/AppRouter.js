@@ -8,28 +8,31 @@ import React, { useState } from 'react';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-//users routes
+// // //users routes
 import Home from '../pages/Homepage';
 import Searchpage from '../pages/Searchpage';
-import Adminprofile from '../Admin/Adminprofile';
-import Form from '../Seller/reg2';
 import About from '../components/Aboutus';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
 // import ProductPage from '../pages/ProductPage';
-import TermsandCond from '../Seller/T&C';
+import Groups from '../pages/Groups';
 
-import Shops from '../Admin/Shops';
-import Pendingshops from '../Admin/Pendingshops';
-import Allusers from '../Admin/Userspage';
+
+// user page
+import AddProduct from '../Seller/Addproduct';
 import UserDashboard from '../Seller/Shop';
 import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
+import Form from '../Seller/reg2';
+import TermsandCond from '../Seller/T&C';
+
 
 
 // admin routes
-import Groups from '../pages/Groups';
-import AddProduct from '../Seller/Addproduct';
+import Adminprofile from '../Admin/Adminprofile';
+// import Shops from '../Admin/Shops';
+import Pendingshops from '../Admin/Pendingshops';
+import Allusers from '../Admin/Userspage';
 import Category from '../Admin/AddCategories';
 
 
@@ -66,7 +69,7 @@ function AppRouter() {
         <Route path="/addproduct" element={<AddProduct/>} />
 
         <Route path="/admin/pending" element={<Pendingshops/>} />
-         <Route path="/admin/shops" element={<Shops/>} /> 
+         {/* <Route path="/admin/shops" element={<Shops/>} />  */}
         <Route path="/admin/category" element={<Category/>} />
 
         {/* Subcategory and Product routes */}
