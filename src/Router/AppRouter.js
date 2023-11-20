@@ -39,15 +39,11 @@ import AddGroup from '../Admin/Add-group';
 import AllCategories from '../Admin/Category';
 
 
-
-
-
 function AppRouter() {
   // const { user, setUser } = useAuth(); // Use the custom hook to get user data
+  const [selectedSlug, setSelectedSlug] = useState(''); // Assuming you set this value somehow
 
  
-
-
 
   return (
     
@@ -66,8 +62,8 @@ function AppRouter() {
         <Route path="/admin/shops" element={<Allusers/>} /> 
         <Route path="/admin/pending" element={<Pendingshops/>} />
         <Route path="/admin/addcategory" element={<Category/>} />
-        <Route path="/admin/addsub" element={<AddSubcategory/>} />
-        <Route path="/admin/addgroup" element={<AddGroup/>} />
+        <Route path="/admin/addsub" element={<AddSubcategory selectedSlug={selectedSlug} />} />
+       <Route path="/admin/addgroup" element={<AddGroup/>} />
         <Route path="/admin/all" element={<AllCategories/>} />
 
 
