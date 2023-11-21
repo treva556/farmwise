@@ -47,14 +47,14 @@ function Groups() {
       <h1>Groups for Subcategory: {subcategorySlug}</h1>
       <div className="flex flex-wrap justify-center">
         {groups.map((group) => (
-          <div key={group.id} className="m-4 bg-yellow-300 p-8 rounded-lg shadow-lg">
+          <div key={group.id} className="m-11 bg-yellow-300 p-12 rounded-lg shadow-lg">
             <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
             {/* Display the image */}
             {group.image_url && (
               <img
-                src={`http://localhost:3000/${group.image_url}`}
+                src={group.image_url}
                 alt={group.name}
-                className="w-50 h-50 object-cover rounded-full" // Adjust size as needed
+                className="w-20 h-11 object-cover rounded-full" // Adjust size as needed
               />
             )}
             {/* Add more group details here */}
