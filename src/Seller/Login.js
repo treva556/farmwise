@@ -1,8 +1,6 @@
 
 
 
-
-
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -56,30 +54,40 @@ const LoginShop = () => {
   }, []);
 
   return (
-    <div className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          ref={emailRef}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-          required
-        />
-        <button type="submit">Login</button>
+    <div className="bg-white text-white">
+      <h2 className=" text-black">Login</h2>
+      <form className="bg-green-800" onSubmit={handleSubmit}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <input
+            type="email"
+            placeholder="Email"
+            ref={emailRef}
+            required
+            style={{
+              backgroundColor: "green",
+              color: "green",
+              marginBottom: "10px",
+              padding: "5px",
+            }}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            ref={passwordRef}
+            required
+            style={{
+              backgroundColor: "green",
+              color: "white",
+              padding: "5px",
+            }}
+          />
+        </div>
+        <button type="submit" style={{ backgroundColor: "green", color: "white" }}>
+          Login
+        </button>
       </form>
     </div>
   );
 };
 
 export default LoginShop;
-
-
-
-
-

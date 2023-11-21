@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // // //users routes
 import Home from '../pages/Homepage';
-import Searchpage from '../pages/Searchpage';
+// import Searchpage from '../pages/Searchpage';
 import About from '../components/Aboutus';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
@@ -53,7 +53,7 @@ function AppRouter() {
         <Route path="/sellershop" element={<UserDashboard/>} />
 
         <Route path="/login" element={<LoginShop />} /> 
-        <Route path="/search" element={<Searchpage />} />
+        {/* <Route path="/search" element={<Searchpage />} /> */}
         <Route path="/form" element={<Form/>} />
         <Route path="/addproduct" element={<AddProduct/>} />
 
