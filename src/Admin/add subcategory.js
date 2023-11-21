@@ -32,18 +32,18 @@ function AddSubcategory() {
       console.error('Please fill in all required fields');
       return;
     }
-
+  
     try {
       const formData = new FormData();
-      formData.append('name', subcategoryName);
-      formData.append('slug', subcategorySlug);
-      formData.append('image', subcategoryImage);
-
+      formData.append('subcategory[name]', subcategoryName);
+      formData.append('subcategory[slug]', subcategorySlug);
+      formData.append('subcategory[image]', subcategoryImage);
+  
       const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories`, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (response.ok) {
         console.log('Subcategory created successfully!');
       } else {
@@ -59,9 +59,9 @@ function AddSubcategory() {
       <form onSubmit={handleSubmit}>
         <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
         {categories.map((category) => (
-    <option key={category.id} value={category.id}>
-      {category.name}
-    </option>
+    <option key={category.id} value={category.slug}>
+    {category.name}
+  </option>
   ))}
         </select>
 

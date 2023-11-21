@@ -1,5 +1,7 @@
 
 
+// Why is this code for fetching categories fetching and displaying the image okay but not the subcategory
+
 //code
 
 import React, { useState, useEffect } from "react";
@@ -9,7 +11,7 @@ function Bodyy() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://farmerr-dgb1.onrender.com")
+    fetch("http://localhost:3000")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -21,10 +23,10 @@ function Bodyy() {
   }, []);
 
   const getImageUrl = (category) => {
-    const defaultImageUrl = "https://farmerr-dgb1.onrender.com//path/to/default/image.png";
+    const defaultImageUrl = "http://localhost:3000//path/to/default/image.png";
   
     if (category.image_url) {
-      const imageUrl = `https://farmerr-dgb1.onrender.com/${category.image_url}`;
+      const imageUrl = `http://localhost:3000/${category.image_url}`;
       console.log('Image URL:', imageUrl); // Log the image URL
       return imageUrl;
     } else {
@@ -76,3 +78,10 @@ function Bodyy() {
 }
 ////
 export default Bodyy;
+
+
+
+
+// url example:Image URL: http://localhost:3000//rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--42b4e42d64bbf6ffc203474b68f49e1fbfd1cf61/Screenshot%20from%202023-10-27%2023-09-38.png
+
+
