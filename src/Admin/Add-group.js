@@ -65,7 +65,7 @@ function AddGroup() {
       });
   
       if (response.ok) {
-        console.log('Group created successfully!');
+        console.log('Group created successfully!', [...formData.entries()]);
       } else {
         console.error('Error creating group');
       }

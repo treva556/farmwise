@@ -19,6 +19,8 @@ function SubcategoryPage() {
         return response.json();
       })
       .then((data) => {
+        console.log(data); // Log the data received
+
         setSubcategories(data);
         setLoading(false);
       })
@@ -47,7 +49,7 @@ function SubcategoryPage() {
         {subcategories.map((subcategory) => (
           <div key={subcategory.id} className="m-4 bg-yellow-300 p-8 rounded-lg shadow-lg">
             {/* Display Subcategory Image */}
-            <img src={subcategory.image_url} alt={subcategory.name} className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src={subcategory.image_url} alt={subcategory.name} className="w-32 h-32 object-cover mx-auto mb-4" />
 
             <h1 className="text-2xl font-semibold mb-4">{subcategory.name}</h1>
             <p className="text-gray-700 mb-2">{subcategory.description}</p>

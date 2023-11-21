@@ -1,5 +1,6 @@
 
 
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -18,6 +19,8 @@ function Groups() {
         return response.json();
       })
       .then((data) => {
+        console.log(data); // Log the data received
+
         setGroups(data);
         setLoading(false);
       })
@@ -46,6 +49,14 @@ function Groups() {
         {groups.map((group) => (
           <div key={group.id} className="m-4 bg-yellow-300 p-8 rounded-lg shadow-lg">
             <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
+            {/* Display the image */}
+            {group.image_url && (
+              <img
+                src={`http://localhost:3000/${group.image_url}`}
+                alt={group.name}
+                className="w-50 h-50 object-cover rounded-full" // Adjust size as needed
+              />
+            )}
             {/* Add more group details here */}
           </div>
         ))}
