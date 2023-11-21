@@ -52,18 +52,18 @@ function AddGroup() {
       console.error('Please fill in all required fields');
       return;
     }
-
+  
     try {
       const formData = new FormData();
-      formData.append('name', groupName);
-      formData.append('slug', groupSlug);
-      formData.append('image', groupImage);
-
+      formData.append('group[name]', groupName);
+      formData.append('group[slug]', groupSlug);
+      formData.append('group[image]', groupImage);
+  
       const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories/${selectedSubcategory}/groups`, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (response.ok) {
         console.log('Group created successfully!');
       } else {
@@ -80,7 +80,7 @@ function AddGroup() {
         <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value="">Select a category</option>
           {categories.map((category) => (
-            <option key={category.id} value={category.id}>
+            <option key={category.id} value={category.slug}>
               {category.name}
             </option>
           ))}
@@ -89,7 +89,7 @@ function AddGroup() {
         <select value={selectedSubcategory} onChange={(e) => setSelectedSubcategory(e.target.value)}>
           <option value="">Select a subcategory</option>
           {subcategories.map((subcategory) => (
-            <option key={subcategory.id} value={subcategory.id}>
+            <option key={subcategory.id} value={subcategory.slug}>
               {subcategory.name}
             </option>
           ))}
