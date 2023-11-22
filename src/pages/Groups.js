@@ -2,7 +2,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function Groups() {
   const [groups, setGroups] = useState([]);
@@ -48,13 +48,16 @@ function Groups() {
       <div className="flex flex-wrap justify-center">
         {groups.map((group) => (
           <div key={group.id} className="m-11 bg-yellow-300 p-12 shadow-lg">
-            <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
+            {/* Wrap group details with Link component */}
+            <Link to={`/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${group.slug}/products`}>
+              <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
+            </Link>
             {/* Display the image */}
             {group.image_url && (
               <img
                 src={group.image_url}
                 alt={group.name}
-                className="w-20 h-11 object-cover " // Adjust size as needed
+                className="w-20 h-11 object-cover" // Adjust size as needed
               />
             )}
             {/* Add more group details here */}
