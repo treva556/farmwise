@@ -20,7 +20,29 @@ import { Link } from 'react-router-dom';
       console.log("County Filter:", countyFilter);
       console.log("Subcounty Filter:", subcountyFilter);
     };
-  
+
+
+  const fetchProductsInGroup = async (categorySlug, subcategorySlug, groupSlug) => {
+  try {
+    const response = await fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/search`);
+    if (response.ok) {
+      const products = await response.json();
+      // Handle products received from the backend
+    } else {
+      throw new Error('Product search request failed');
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+};
+// Frontend - React
+const searchForProducts = async (groupName) => {
+  const normalizedGroupName = groupName.toLowerCase(); // Normalize the search query
+  // Perform the search with the normalized group name
+  // fetch(`http://localhost:3000/products/search?group_name=${normalizedGroupName}`)
+};
+
+
     return (
       <div className="flex flex-col md:flex-row gap-4">
         <input
