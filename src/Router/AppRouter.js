@@ -14,7 +14,7 @@ import Home from '../pages/Homepage';
 import About from '../components/Aboutus';
 import SubcategoryPage from '../pages/SubcategoryPage';
 // import CategoryPage from '../pages/CategoryPage';
-// import ProductPage from '../pages/ProductPage';
+import ProductPage from '../pages/ProductPage';
 import Groups from '../pages/Groups';
 
 
@@ -78,7 +78,10 @@ function AppRouter() {
         {/* Subcategory and Product routes */}
          <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
          <Route path="/categories/:categorySlug/subcategories" element={<SubcategoryPage/>} /> 
-
+         <Route
+  path="/categories/:categorySlug/subcategories/:subcategorySlug/groups/:groupSlug/products"
+  element={<ProductPage />}
+/>
 
         {/* <Route path="/categories/:categoryId" element={<CategoryPage />} /> */}
 

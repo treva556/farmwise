@@ -50,7 +50,7 @@ function Groups() {
           <div key={group.id} className="m-11 bg-yellow-300 p-12 shadow-lg">
             {/* Wrap group details with Link component */}
             <Link to={`/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${group.slug}/products`}>
-              <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
+         <h1 className="text-2xl font-semibold mb-4">{group.name}</h1>
             </Link>
             {/* Display the image */}
             {group.image_url && (

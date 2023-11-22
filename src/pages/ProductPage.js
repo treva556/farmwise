@@ -5,11 +5,11 @@ import { useParams } from "react-router-dom";
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
-  const { categorySlug, subcategorySlug } = useParams();
+  const { categorySlug, subcategorySlug, groupSlug } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/products.json`)
-      .then(response => response.json())
+    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
+    .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
         if (data && data.length > 0) {
@@ -19,7 +19,7 @@ function ProductPage() {
       .catch(error => {
         console.error('Error fetching product data:', error);
       });
-  }, [categorySlug, subcategorySlug]);
+  }, [categorySlug, subcategorySlug, groupSlug]);
 
   if (!product) {
     return <div>Loading...</div>;
