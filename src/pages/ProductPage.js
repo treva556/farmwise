@@ -35,22 +35,8 @@ function ProductPage() {
         <div key={product.id} className="w-full max-w-3xl bg-yellow-300 p-8 rounded-lg shadow-lg mb-4">
           <h1 className="text-2xl font-semibold mb-4">{product.name}</h1>
           <h1 className="text-2xl font-semibold mb-4">{product.location}</h1>
-          <h1 className="text-2xl font-semibold mb-4">{product.description}</h1>
           <h1 className="text-2xl font-semibold mb-4">{product.price}</h1>
 
-
-          {product.image_urls && product.image_urls.length > 0 && (
-  <div>
-    {product.image_urls.map((imageUrl, index) => (
-      <img
-        key={index}
-        src={`${baseURL}${imageUrl}`}
-        alt={`Image ${index}`}
-        className="max-w-full mb-4"
-      />
-    ))}
-  </div>
-)}
           {/* Other product details */}
           <Link to={`/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/${product.id}`}>View Details</Link>
 
