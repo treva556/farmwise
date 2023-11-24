@@ -7,11 +7,11 @@ import { useParams, Link } from "react-router-dom";
 function ProductPage() {
   const [products, setProducts] = useState(null);
   const { categorySlug, subcategorySlug, groupSlug } = useParams();
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'https://farmerr-dgb1.onrender.com/';
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
+    fetch(`https://farmerr-dgb1.onrender.com/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);

@@ -30,7 +30,7 @@ function Form() {
     };
 
     try {
-      const res = await axios.post("http://localhost:3000/register", formData);
+      const res = await axios.post("https://farmerr-dgb1.onrender.com/register", formData);
       console.log('Response from server:', res.data);
       // Handle success, e.g., redirect to login page
       navigate('/login'); // Redirect to the login page after successful registration

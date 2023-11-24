@@ -6,7 +6,7 @@ function Allusers() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/users.json")
+    fetch("https://farmerr-dgb1.onrender.com/users.json")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data.users); // Access the "users" key in the response data

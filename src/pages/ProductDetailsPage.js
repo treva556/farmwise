@@ -10,7 +10,7 @@ function ProductDetailPage() {
   const { categorySlug, subcategorySlug, groupSlug } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/${productId}`)
+    fetch(`https://farmerr-dgb1.onrender.com/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/${productId}`)
       .then(response => response.json())
       .then(data => {
         setProduct(data);

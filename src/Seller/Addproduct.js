@@ -29,7 +29,7 @@ const AddProduct = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseCategories = await fetch("http://localhost:3000/categories.json");
+        const responseCategories = await fetch("https://farmerr-dgb1.onrender.com/categories.json");
         const dataCategories = await responseCategories.json();
         setCategories(dataCategories);
 

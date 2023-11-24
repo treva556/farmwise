@@ -41,7 +41,7 @@ function AddSubcategory() {
       formData.append('subcategory[slug]', subcategorySlug);
       formData.append('subcategory[image]', subcategoryImage);
   
-      const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories`, {
+      const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${selectedCategory}/subcategories`, {
         method: 'POST',
         body: formData,
       });

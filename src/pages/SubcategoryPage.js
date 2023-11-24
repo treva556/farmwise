@@ -10,7 +10,7 @@ function SubcategoryPage() {
   const { categorySlug } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories.json`)
+    fetch(`https://farmerr-dgb1.onrender.com/${categorySlug}/subcategories.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

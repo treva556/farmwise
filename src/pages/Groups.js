@@ -11,7 +11,7 @@ function Groups() {
   const { categorySlug, subcategorySlug } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups.json`)
+    fetch(`https://farmerr-dgb1.onrender.com/categories/${categorySlug}/subcategories/${subcategorySlug}/groups.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
