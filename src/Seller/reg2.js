@@ -1,10 +1,12 @@
 
 
-
+// register
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 function Form() {
+  const navigate = useNavigate(); // Initialize navigate function
   const nameRef = useRef();
   const emailRef = useRef();
   const phoneRef = useRef();
@@ -13,17 +15,9 @@ function Form() {
   const passwordConfirmRef = useRef();
 
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone_number: '',
-    location: '',
-    password: '',
-    password_confirmation: '' // Changed to match Rails controller parameter
-  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     const formData = {
       user: {
         name: nameRef.current.value,
@@ -34,22 +28,23 @@ function Form() {
         password_confirmation: passwordConfirmRef.current.value
       }
     };
-  
+
     try {
       const res = await axios.post("http://localhost:3000/register", formData);
       console.log('Response from server:', res.data);
-      // Handle success, e.g., redirect or show a success message
+      // Handle success, e.g., redirect to login page
+      navigate('/login'); // Redirect to the login page after successful registration
     } catch (error) {
       console.error('Error from server:', error);
-      // Handle error, e.g., show an error message to the user
       if (error.response) {
         setError(error.response.data.error);
       }
     }
   };
+
   
 
-  console.log(formData)
+  // console.log(formData)
 
   return (
     <div className="bg-yellow-400 flex justify-center items-center min-h-screen">

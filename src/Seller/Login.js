@@ -1,13 +1,18 @@
 
 
-
+// login
 import React, { useEffect, useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 const LoginShop = () => {
+  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate("/form"); // Navigates to the "/register" route
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +62,7 @@ const LoginShop = () => {
     <div className="bg-white text-white">
       <h2 className=" text-black">Login</h2>
       <form className="bg-green-800" onSubmit={handleSubmit}>
+        {/* ... your form inputs */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <input
             type="email"
@@ -85,6 +91,9 @@ const LoginShop = () => {
         <button type="submit" style={{ backgroundColor: "green", color: "white" }}>
           Login
         </button>
+        <h3>Dont have an account, register below</h3>
+        {/* Register button navigates to the "/register" route */}
+        <button onClick={handleRegisterClick}>Register</button>
       </form>
     </div>
   );
