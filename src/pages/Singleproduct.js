@@ -3,7 +3,7 @@ import React from "react";
 function Singleproduct() {
   return (
     <div className="flex">
-         jiuuu
+         jiuuo
     </div>
   );
 }

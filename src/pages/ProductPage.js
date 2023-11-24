@@ -1,5 +1,6 @@
 
-////
+
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +10,7 @@ function ProductPage() {
 
   useEffect(() => {
     fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
-    .then(response => response.json())
+      .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
         if (data && data.length > 0) {
@@ -30,9 +31,15 @@ function ProductPage() {
       <h1 className="text-3xl font-semibold text-white mb-8">Products</h1>
       <div className="w-full max-w-3xl bg-yellow-300 p-8 rounded-lg shadow-lg">
         <h1 className="text-2xl font-semibold mb-4">{product.name}</h1>
-        <p className="text-gray-700 mb-2">{product.description}</p>
-        <p className="text-green-600 font-semibold">Price: ${product.price}</p>
-        {/* Render other product details */}
+        {/* Other product details */}
+    {/* Display all images */}
+{product.image_urls && product.image_urls.length > 0 && (
+  <div>
+    {product.image_urls.map((imageUrl, index) => (
+      <img key={index} src={imageUrl} alt={`Image ${index}`} className="max-w-full mb-4" />
+    ))}
+  </div>
+)}
       </div>
     </div>
   );
