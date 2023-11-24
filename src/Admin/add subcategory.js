@@ -15,7 +15,7 @@ function AddSubcategory() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categories.json');
+        const response = await fetch('https://farmerr-dgb1.onrender.com/categories.json');
         if (response.ok) {
           const data = await response.json();
           setCategories(data); // Update the categories state with fetched data
