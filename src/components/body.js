@@ -11,8 +11,8 @@ function Bodyy() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://farmerr-dgb1.onrender.com")
-      .then((response) => response.json())
+    fetch("https://farmerr-dgb1.onrender.com/categories.json")
+    .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setCategories(data);
