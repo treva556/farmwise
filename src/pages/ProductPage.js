@@ -7,6 +7,8 @@ import { useParams, Link } from "react-router-dom";
 function ProductPage() {
   const [products, setProducts] = useState(null);
   const { categorySlug, subcategorySlug, groupSlug } = useParams();
+  const baseURL = 'http://localhost:3000';
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
@@ -38,12 +40,17 @@ function ProductPage() {
 
 
           {product.image_urls && product.image_urls.length > 0 && (
-            <div>
-              {product.image_urls.map((imageUrl, index) => (
-                <img key={index} src={imageUrl} alt={`Image ${index}`} className="max-w-full mb-4" />
-              ))}
-            </div>
-          )}
+  <div>
+    {product.image_urls.map((imageUrl, index) => (
+      <img
+        key={index}
+        src={`${baseURL}${imageUrl}`}
+        alt={`Image ${index}`}
+        className="max-w-full mb-4"
+      />
+    ))}
+  </div>
+)}
           {/* Other product details */}
           <Link to={`/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/${product.id}`}>View Details</Link>
 
