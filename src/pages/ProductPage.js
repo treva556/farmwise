@@ -2,7 +2,7 @@
 
 // show products
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function ProductPage() {
   const [products, setProducts] = useState(null);
@@ -45,8 +45,11 @@ function ProductPage() {
             </div>
           )}
           {/* Other product details */}
+          <Link to={`/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/${product.id}`}>View Details</Link>
+
         </div>
       ))}
+
     </div>
   );
 }

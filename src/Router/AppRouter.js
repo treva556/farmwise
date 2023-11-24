@@ -2,7 +2,7 @@
 
 
 
-
+// Parent
 import React, { useState } from 'react';
 
 
@@ -25,7 +25,7 @@ import LoginShop from '../Seller/Login';
 // import createProduct from '../Seller/Productform';
 import Form from '../Seller/reg2';
 import TermsandCond from '../Seller/T&C';
-
+import ProductDetailPage from '../pages/ProductDetailsPage';
 
 
 // admin routes
@@ -78,11 +78,13 @@ function AppRouter() {
         {/* Subcategory and Product routes */}
          <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups" element={<Groups/>} />
          <Route path="/categories/:categorySlug/subcategories" element={<SubcategoryPage/>} /> 
-         <Route
-  path="/categories/:categorySlug/subcategories/:subcategorySlug/groups/:groupSlug/products"
+         <Route path="/categories/:categorySlug/subcategories/:subcategorySlug/groups/:groupSlug/products"
   element={<ProductPage />}
 />
-
+<Route
+  path="/categories/:categorySlug/subcategories/:subcategorySlug/groups/:groupSlug/products/:productId"
+  element={<ProductDetailPage />}
+/>
         {/* <Route path="/categories/:categoryId" element={<CategoryPage />} /> */}
 
 
