@@ -33,7 +33,7 @@ function AddGroup() {
     const fetchSubcategories = async () => {
       if (!selectedCategory) return;
       try {
-        const response = await fetch(`http://localhost:3000/categories/${selectedCategory}/subcategories.json`);
+        const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${selectedCategory}/subcategories.json`);
         if (response.ok) {
           const data = await response.json();
           setSubcategories(data);
