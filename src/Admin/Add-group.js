@@ -59,7 +59,7 @@ function AddGroup() {
       formData.append('group[slug]', groupSlug);
       formData.append('group[image]', groupImage);
   
-      const response = await fetch(`https://farmerr-dgb1.onrender.com/${selectedCategory}/subcategories/${selectedSubcategory}/groups`, {
+      const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${selectedCategory}/subcategories/${selectedSubcategory}/groups`, {
         method: 'POST',
         body: formData,
       });

@@ -47,7 +47,7 @@ const AddProduct = () => {
 
   const fetchSubcategories = async (selectedSlug) => {
     try {
-      const response = await fetch(`http://localhost:3000/categories/${selectedSlug}/subcategories.json`);
+      const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${selectedSlug}/subcategories.json`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -58,9 +58,12 @@ const AddProduct = () => {
     }
   };
 
+/////
+/////
+
   const fetchGroups = async (selectedCategorySlug, selectedSubcategorySlug) => {
     try {
-      const response = await fetch(`http://localhost:3000/categories/${selectedCategorySlug}/subcategories/${selectedSubcategorySlug}/groups.json`);
+      const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${selectedCategorySlug}/subcategories/${selectedSubcategorySlug}/groups.json`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -126,7 +129,7 @@ const AddProduct = () => {
       }
   
       try {
-        const response = await fetch(`http://localhost:3000/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
+        const response = await fetch(`https://farmerr-dgb1.onrender.com/categories/${productData.category}/subcategories/${productData.subcategory}/groups/${productData.group}/products`, {
           method: "POST",
           body: formData,
         });
