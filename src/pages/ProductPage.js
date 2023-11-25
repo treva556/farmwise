@@ -11,7 +11,7 @@ function ProductPage() {
 
 
   useEffect(() => {
-    fetch(`https://farmerr-dgb1.onrender.com/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
+    fetch(`https://farmerr-dgb1.onrender.com/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products.json`)
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
