@@ -11,6 +11,8 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ftp.samkirkland.com
-        username: myFtpUserName
-        password: ${{ secrets.ftp_password }}
+        server: ${{ secrets.GET_CPANEL_REACT_SERVER }}
+        username: ${{ secrets.GET_CPANEL_REACT_USER }}
+        password: ${{ secrets.GET_CPANEL_REACT_PWD }}
+        protocol: ${{ secrets.GET_CPANEL_REACT_PROTOCOL }}
+        local-dir: ./build/
