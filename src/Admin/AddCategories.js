@@ -1,7 +1,7 @@
 
 // admin category
 
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 
 import React, { useState } from "react";
 

@@ -1,51 +1,52 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React from 'react';
+// , { useState } from "react";
+// import { Link } from 'react-router-dom';
 
 
   function Searchbar() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [countyFilter, setCountyFilter] = useState("National");
-    const [subcountyFilter, setSubcountyFilter] = useState("");
+//     const [searchTerm, setSearchTerm] = useState("");
+//     const [countyFilter, setCountyFilter] = useState("National");
+//     const [subcountyFilter, setSubcountyFilter] = useState("");
   
-    // Define subcounties for each county
-    const countySubcounties = {
-      County1: ["Subcounty1", "Subcounty2"],
-      County2: ["Subcounty3", "Subcounty4"],
-      // Add more counties and their subcounties as needed
-    };
+//     // Define subcounties for each county
+//     const countySubcounties = {
+//       County1: ["Subcounty1", "Subcounty2"],
+//       County2: ["Subcounty3", "Subcounty4"],
+//       // Add more counties and their subcounties as needed
+//     };
   
-    const handleSearch = () => {
-      // Perform the search with selected filters
-      console.log("Search Term:", searchTerm);
-      console.log("County Filter:", countyFilter);
-      console.log("Subcounty Filter:", subcountyFilter);
-    };
+//     const handleSearch = () => {
+//       // Perform the search with selected filters
+//       console.log("Search Term:", searchTerm);
+//       console.log("County Filter:", countyFilter);
+//       console.log("Subcounty Filter:", subcountyFilter);
+//     };
 
 
-  const fetchProductsInGroup = async (categorySlug, subcategorySlug, groupSlug) => {
-  try {
-    const response = await fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/search`);
-    if (response.ok) {
-      const products = await response.json();
-      // Handle products received from the backend
-    } else {
-      throw new Error('Product search request failed');
-    }
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-};
-// Frontend - React
-const searchForProducts = async (groupName) => {
-  const normalizedGroupName = groupName.toLowerCase(); // Normalize the search query
-  // Perform the search with the normalized group name
-  // fetch(`http://localhost:3000/products/search?group_name=${normalizedGroupName}`)
-};
+//   const fetchProductsInGroup = async (categorySlug, subcategorySlug, groupSlug) => {
+//   try {
+//     const response = await fetch(`http://localhost:3000/categories/${categorySlug}/subcategories/${subcategorySlug}/groups/${groupSlug}/products/search`);
+//     if (response.ok) {
+//       const products = await response.json();
+//       // Handle products received from the backend
+//     } else {
+//       throw new Error('Product search request failed');
+//     }
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//   }
+// };
+// // Frontend - React
+// const searchForProducts = async (groupName) => {
+//   const normalizedGroupName = groupName.toLowerCase(); // Normalize the search query
+//   // Perform the search with the normalized group name
+//   // fetch(`http://localhost:3000/products/search?group_name=${normalizedGroupName}`)
+// };
 
 
     return (
       <div className="flex flex-col md:flex-row gap-4">
-        <input
+        {/* <input
           type="text"
           placeholder="Search for products..."
           className="w-full md:w-80 px-3 h-10 rounded-l border-2 border-yellow-500 focus:outline-none focus:border-yellow-500"
@@ -73,7 +74,7 @@ const searchForProducts = async (groupName) => {
           <option value="County1">County1</option>
           <option value="County2">County2</option>
           {/* Add more counties */}
-        </select>
+        {/* </select>
         {countyFilter !== "National" && countySubcounties[countyFilter] && (
           <select
             id="subcountyFilter"
@@ -103,7 +104,7 @@ const searchForProducts = async (groupName) => {
         >
           Be A Seller
         </button>
-      </Link>
+      </Link> */} 
     </div>
   );
 }

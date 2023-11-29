@@ -7,7 +7,7 @@ import { useParams, Link } from "react-router-dom";
 function ProductPage() {
   const [products, setProducts] = useState(null);
   const { categorySlug, subcategorySlug, groupSlug } = useParams();
-  const baseURL = 'https://farmerr-dgb1.onrender.com/';
+  // const baseURL = 'https://farmerr-dgb1.onrender.com/';
 
 
   useEffect(() => {

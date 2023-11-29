@@ -30,12 +30,12 @@ function ProductDetailPage() {
       <p>{product.description}</p>
       {/* Display all images */}
       {product.image_urls && product.image_urls.length > 0 && (
-        <div>
-          {product.image_urls.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} alt={`Image ${index}`} />
-          ))}
-        </div>
-      )}
+  <div>
+    {product.image_urls.map((imageUrl, index) => (
+      <img key={index} src={imageUrl} alt={`Product ${index + 1} view`} />
+    ))}
+  </div>
+)}
       {/* Other product details */}
     </div>
   );
