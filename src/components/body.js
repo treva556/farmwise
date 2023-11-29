@@ -34,22 +34,22 @@ function Bodyy() {
     }
   };
 
-  const handleDelete = (slug) => {
-    fetch(`https://farmerr-dgb1.onrender.com//${slug}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Category deleted:', data.message);
-        setCategories(categories.filter(category => category.slug !== slug));
-      })
-      .catch(error => {
-        console.error('Error deleting category:', error);
-      });
-  };
+  // const handleDelete = (slug) => {
+  //   fetch(`https://farmerr-dgb1.onrender.com//${slug}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log('Category deleted:', data.message);
+  //       setCategories(categories.filter(category => category.slug !== slug));
+  //     })
+  //     .catch(error => {
+  //       console.error('Error deleting category:', error);
+  //     });
+  // };
 
   return (
     <>

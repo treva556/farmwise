@@ -41,8 +41,8 @@ import AllCategories from '../Admin/Category';
 
 function AppRouter() {
   // const { user, setUser } = useAuth(); // Use the custom hook to get user data
-  const [selectedSlug, setSelectedSlug] = useState(''); // Assuming you set this value somehow
-
+  const [selectedSlug] = useState(''); // Assuming you set this value somehow
+  // , setSelectedSlug
  
 
   return (

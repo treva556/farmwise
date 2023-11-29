@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginShop from "./Login"
+// import LoginShop from "./Login"
 
 const AddProduct = () => {
   const navigate = useNavigate();
