@@ -1,6 +1,5 @@
 
 
-// Why is this code for fetching categories fetching and displaying the image okay but not the subcategory
 
 //code
 
