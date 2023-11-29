@@ -13,15 +13,15 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
   
-    #   - name: Use Node.js 16
-    #     uses: actions/setup-node@v2
-    #     with:
-    #       node-version: '16'
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
         
-    #   - name: 🔨 Build Project
-    #     run: |
-    #       npm install
-    #       npm run build
+      - name: 🔨 Build Project
+        run: |
+          npm install
+          npm run build
       
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -30,4 +30,4 @@ jobs:
           username: ${{ secrets.GIT_CPANEL_REACT_USER }}
           password: ${{ secrets.GIT_CPANEL_REACT_PWD }}
           protocol: ${{ secrets.GIT_CPANEL_REACT_PROTOCOL }}
-        #   local-dir: ./build/
+          local-dir: ./build/
