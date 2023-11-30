@@ -6,7 +6,7 @@ import Bodyy from "../components/body";
 
 function Home() {
     return (
-      <div className=" bg-green-600">
+      <div className=" bg-green-900">
         <header className="">
          <Ad/>
 
